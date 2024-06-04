@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<nav>
+    <ul>
+        <li><a th:href="@{/driver/show/all}">Show All Drivers</a></li>
+        <li><a th:href="@{/parcel/show/all}">Show All Parcells</a></li>
+    </ul>
+</nav>
+<h1 th:text = "${title}" style="color:red;"></h1>
+<h2 th:text = "${msg}"></h2>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Adverts</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav>
+    <h2 th:text = "${title}"></h2>
+    <ul>
+
+        <li><a th:href="@{/advertisement/show/all}">Show All Adverts</a></li>
+
+    </ul>
+</nav>
+<h2 th:text = "${mytitle}"></h2>
+<table>
+    <tr>
+        <td>IDa</td>
+        <td>Title</td>
+        <td>Price</td>
+        <td>Description</td>
+    </tr>
+    <tr th:each="tempPr: ${myobjs}">
+        <td th:text = "${tempPr.getIda()}"></td>
+        <td th:text = "${tempPr.getTitle()}"></td>
+        <td th:text = "${tempPr.getPrice()}"></td>
+        <td th:text = "${tempPr.getDescription()}"></td>
+        <td>
+            <a th:href="@{'/advertisement/update/' + ${tempPr.ida}}" target="_self">Update</a>
+        </td>
+        <td style="background-color: palevioletred;">
+            <a  th:href="@{'/advertisement/remove/' + ${tempPr.ida}}" target="_self">Delete</a>
+        </td>
+    </tr>
+
+</table>
+<a style="" th:href="@{/advertisement/add}"  target="_self">Make New Driver</a>
+</body>
+
+</html>
