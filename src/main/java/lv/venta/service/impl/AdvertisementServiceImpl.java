@@ -6,6 +6,7 @@ import lv.venta.service.IAdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Service
@@ -33,6 +34,7 @@ public class AdvertisementServiceImpl implements IAdvertisementService {
         if(advFromDB  != null) {
             throw new Exception("advert already exists");
         } else {
+            adv.setDate(LocalDateTime.now());
             return advertisementRepo.save(adv);
         }
     }
@@ -49,7 +51,7 @@ public class AdvertisementServiceImpl implements IAdvertisementService {
         updateAdv.setTitle(adv.getTitle());
         updateAdv.setPrice(adv.getPrice());
         updateAdv.setDescription(adv.getDescription());
-        updateAdv.setDate(adv.getDate());
+        updateAdv.setDate(LocalDateTime.now());
         return advertisementRepo.save(updateAdv);
     }
 }

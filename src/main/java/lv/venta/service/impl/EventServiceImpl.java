@@ -7,6 +7,7 @@ import lv.venta.service.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Service
@@ -35,6 +36,7 @@ public class EventServiceImpl implements IEventService {
         if(eventFromDB  != null) {
             throw new Exception("Event already exists");
         } else {
+            event.setStartDate(LocalDateTime.now().plusDays(event.getStartTimeInDays()));
             return eventRepo.save(event);
         }
     }
@@ -51,6 +53,7 @@ public class EventServiceImpl implements IEventService {
         eventUpdate.setPrice(event.getPrice());
         eventUpdate.setDescription(event.getDescription());
         eventUpdate.setStartDate(event.getStartDate());
+        eventUpdate.setStartDate(LocalDateTime.now().plusDays(event.getStartTimeInDays()));
         return eventRepo.save(eventUpdate);
     }
 }

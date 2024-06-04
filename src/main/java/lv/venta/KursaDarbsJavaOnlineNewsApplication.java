@@ -30,8 +30,8 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 advertisementRepo.save(ad1);
                 advertisementRepo.save(ad2);
                 System.out.println("All ads: " + advertisementRepo.findAll());
-                Event ev1 = new Event("Ev1", 1.0f, "Ev1 desc", LocalDateTime.now());
-                Event ev2 = new Event("Ev2", 2.0f, "Ev2 desc", LocalDateTime.now());
+                Event ev1 = new Event("Ev1", 1.0f, "Ev1 desc", 2);
+                Event ev2 = new Event("Ev2", 2.0f, "Ev2 desc", 3);
                 eventRepo.save(ev1);
                 eventRepo.save(ev2);
                 System.out.println("All events: " + eventRepo.findAll());

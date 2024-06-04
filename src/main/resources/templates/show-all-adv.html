@@ -20,6 +20,7 @@
         <td>Price</td>
         <td>Description</td>
         <td>Date Created</td>
+        <td>Options</td>
     </tr>
     <tr th:each="tempPr: ${myobjs}">
         <td th:text = "${tempPr.getIda()}"></td>
@@ -29,9 +30,7 @@
         <td th:text = "${tempPr.getDate()}"></td>
         <td>
             <a th:href="@{'/advertisement/update/' + ${tempPr.ida}}" target="_self">Update</a>
-        </td>
-        <td style="background-color: palevioletred;">
-            <a  th:href="@{'/advertisement/remove/' + ${tempPr.ida}}" target="_self">Delete</a>
+            <a  style="color:red;" th:href="@{'/advertisement/remove/' + ${tempPr.ida}}" target="_self">Delete</a>
         </td>
     </tr>
 

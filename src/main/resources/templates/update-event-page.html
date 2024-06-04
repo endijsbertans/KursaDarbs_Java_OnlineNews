@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<h2 th:text = "${title}"></h2>
+<nav>
+    <ul>
+        <li><a  th:href="@{/advertisement/show/all}">Show All Adverts</a></li>
+        <li><a th:href="@{/event/show/all}">Show All Events</a></li>
+    </ul>
+</nav>
+<h1>Complete event form</h1>
+<form action="#" th:action="@{'/event/update/' + ${id}}" th:object="${event}" th:method="post"  >
+    <table>
+        <tr>
+            <td>Title</td>
+            <td> <input type="text" th:field="*{title}"  />  </td>
+            <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}"  ></td>
+        </tr>
+
+        <tr>
+            <td>Price</td>
+            <td> <input type="number" th:field="*{price}"  />  </td>
+            <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}"  ></td>
+        </tr>
+
+        <tr>
+            <td>Description</td>
+            <td> <input type="text" th:field="*{description}"  />  </td>
+            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"  ></td>
+        </tr>
+
+        <tr>
+            <td>Event start after(days) </td>
+            <td> <input type="number" th:field="*{startTimeInDays}"  />  </td>
+            <td th:if="${#fields.hasErrors('startTimeInDays')}" th:errors="*{startTimeInDays}"  ></td>
+        </tr>
+
+        <tr>
+            <td> <input type="submit" title="Submit" />  </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
