@@ -1,15 +1,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>All Adverts</title>
+    <title>All Events</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
 <nav>
     <h2 th:text = "${title}"></h2>
     <ul>
+        <li><a th:href="@{/advertisement/show/all}">Show All Adverts</a></li>
+        <li><a style="color:red;" th:href="@{/event/show/all}">Show All Events</a></li>
 
-        <li><a style="color:red;" th:href="@{/advertisement/show/all}">Show All Adverts</a></li>
-        <li><a th:href="@{/event/show/all}">Show All Events</a></li>
     </ul>
 </nav>
 <h2 th:text = "${mytitle}"></h2>
@@ -19,24 +19,24 @@
         <td>Title</td>
         <td>Price</td>
         <td>Description</td>
-        <td>Date Created</td>
+        <td>Start Date</td>
     </tr>
     <tr th:each="tempPr: ${myobjs}">
-        <td th:text = "${tempPr.getIda()}"></td>
+        <td th:text = "${tempPr.getIde()}"></td>
         <td th:text = "${tempPr.getTitle()}"></td>
         <td th:text = "${tempPr.getPrice()}"></td>
         <td th:text = "${tempPr.getDescription()}"></td>
-        <td th:text = "${tempPr.getDate()}"></td>
+        <td th:text = "${tempPr.getStartDate()}"></td>
         <td>
-            <a th:href="@{'/advertisement/update/' + ${tempPr.ida}}" target="_self">Update</a>
+            <a th:href="@{'/event/update/' + ${tempPr.ide}}" target="_self">Update</a>
         </td>
         <td style="background-color: palevioletred;">
-            <a  th:href="@{'/advertisement/remove/' + ${tempPr.ida}}" target="_self">Delete</a>
+            <a  th:href="@{'/event/remove/' + ${tempPr.ide}}" target="_self">Delete</a>
         </td>
     </tr>
 
 </table>
-<a style="" th:href="@{/advertisement/add}"  target="_self">Make New Advert</a>
+<a style="" th:href="@{/event/add}"  target="_self">Make New Event</a>
 </body>
 
 </html>
