@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IAdvertisementRepo extends CrudRepository<Advertisement, Long> {
+    Advertisement findByTitleAndPriceAndDescription(String title, float price, String description);
 }

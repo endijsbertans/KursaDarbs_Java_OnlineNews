@@ -27,10 +27,13 @@ public class Advertisement {
     @Column(name = "Price")
     @Min(0)
     private float price;
+
     @NotNull
     @Column(name = "Description")
     private String description;
+
     // AUTORS
+
     @NotNull
     private LocalDateTime date;
 
