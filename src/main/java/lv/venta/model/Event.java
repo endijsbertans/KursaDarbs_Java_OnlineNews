@@ -1,8 +1,10 @@
 package lv.venta.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -21,6 +23,7 @@ public class Event {
     private long ide;
 
     @NotNull
+    @Size(min = 3, max = 50)
     @Column(name = "Title")
     private String title;
 
@@ -30,16 +33,22 @@ public class Event {
     private float price;
 
     @NotNull
+    @Size(min = 3, max = 50)
     @Column(name = "Description")
     private String description;
     // AUTORS
-    @NotNull
+    @Column(name = "startDate")
     private LocalDateTime startDate;
 
-    public Event(String title, float price, String description, LocalDateTime date) {
+    @NotNull
+    @Min(0)
+    @Max(365)
+    private int startTimeInDays;
+
+    public Event(String title, float price, String description, int startTimeInDays) {
         setTitle(title);
         setPrice(price);
         setDescription(description);
-        setStartDate(date);
+        setStartDate(LocalDateTime.now().plusDays(startTimeInDays));
     }
 }

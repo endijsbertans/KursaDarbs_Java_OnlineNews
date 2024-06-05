@@ -15,11 +15,12 @@
 <h2 th:text = "${mytitle}"></h2>
 <table>
     <tr>
-        <td>IDa</td>
+        <td>IDe</td>
         <td>Title</td>
         <td>Price</td>
         <td>Description</td>
         <td>Start Date</td>
+        <td>Options</td>
     </tr>
     <tr th:each="tempPr: ${myobjs}">
         <td th:text = "${tempPr.getIde()}"></td>
@@ -29,9 +30,7 @@
         <td th:text = "${tempPr.getStartDate()}"></td>
         <td>
             <a th:href="@{'/event/update/' + ${tempPr.ide}}" target="_self">Update</a>
-        </td>
-        <td style="background-color: palevioletred;">
-            <a  th:href="@{'/event/remove/' + ${tempPr.ide}}" target="_self">Delete</a>
+            <a  style="color:red;" th:href="@{'/event/remove/' + ${tempPr.ide}}" target="_self">Delete</a>
         </td>
     </tr>
 

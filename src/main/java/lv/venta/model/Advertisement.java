@@ -3,6 +3,7 @@ package lv.venta.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class Advertisement {
     private long ida;
 
     @NotNull
+    @Size(min = 3, max = 50)
     @Column(name = "Title")
     private String title;
 
@@ -29,12 +31,12 @@ public class Advertisement {
     private float price;
 
     @NotNull
+    @Size(min = 3, max = 50)
     @Column(name = "Description")
     private String description;
 
     // AUTORS
-
-    @NotNull
+    @Column(name = "Date")
     private LocalDateTime date;
 
     public Advertisement(String title, float price, String description) {
