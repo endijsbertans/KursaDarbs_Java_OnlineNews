@@ -44,19 +44,18 @@ public class AdvertisementController {
     @GetMapping("/add")
     public String getAdvAdd(Model model){
         model.addAttribute("title", "Add advertisement");
-        model.addAttribute("adv", new Advertisement());
+        model.addAttribute("advertisement", new Advertisement());
         return "insert-adv-page";
     }
     @PostMapping("/add")
-    public String postAdvAdd(@Valid Advertisement adv, BindingResult result, Model model){
+    public String postAdvAdd(@Valid Advertisement advertisement, BindingResult result, Model model){
         if(result.hasErrors()){
-            System.out.println(adv);
+            System.out.println(advertisement);
             System.out.println(result);
-
             return "update-adv-page";
         }else{
             try {
-                advService.insertNewAdv(adv);
+                advService.insertNewAdv(advertisement);
                 return "redirect:/advertisement/show/all";
             } catch (Exception e) {
                 model.addAttribute("msg", e.getMessage());
@@ -69,7 +68,7 @@ public class AdvertisementController {
     public String getAdvUpdate(@PathVariable("id") long id, Model model){
         try {
             model.addAttribute("title", "Update advertisement");
-            model.addAttribute("adv", advService.selectAdvById(id));
+            model.addAttribute("advertisement", advService.selectAdvById(id));
             return "update-adv-page";
         } catch (Exception e) {
             model.addAttribute("msg", e.getMessage());
@@ -78,15 +77,15 @@ public class AdvertisementController {
         }
     }
     @PostMapping("/update/{id}")
-    public String postAdvUpdate(@PathVariable("id") long id, @Valid Advertisement adv, BindingResult result, Model model){
+    public String postAdvUpdate(@PathVariable("id") long id, @Valid Advertisement advertisement, BindingResult result, Model model){
         if(result.hasErrors()){
-            System.out.println(adv);
+            System.out.println(advertisement);
             System.out.println(result);
             model.addAttribute("id", id);
             return "update-adv-page";
         }else{
             try {
-                advService.updateAdvById(id, adv);
+                advService.updateAdvById(id, advertisement);
                 return "redirect:/advertisement/show/all";
             } catch (Exception e) {
                 model.addAttribute("msg", e.getMessage());
