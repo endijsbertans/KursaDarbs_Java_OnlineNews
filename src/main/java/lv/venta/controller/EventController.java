@@ -22,7 +22,7 @@ public class EventController {
     @GetMapping("/show/all")
     public String showAllEvents(Model model){
         try {
-            model.addAttribute("myobjs", eventService.selectAllEvents());
+            model.addAttribute("myobjs", eventService.getAllEventsSortedByStartDate());
 
             model.addAttribute("title", "All events");
             return "show-all-events";
