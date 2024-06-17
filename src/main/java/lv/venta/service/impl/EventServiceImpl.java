@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.*;
 
 @Service
 public class EventServiceImpl implements IEventService {
@@ -39,6 +39,12 @@ public class EventServiceImpl implements IEventService {
             event.setStartDate(LocalDateTime.now().plusDays(event.getStartTimeInDays()));
             return eventRepo.save(event);
         }
+    }
+    @Override
+    public List<Event> getAllEventsSortedByStartDate() {
+        List<Event> events = new ArrayList<>((Collection) eventRepo.findAll());
+        Collections.sort(events, Comparator.comparing(Event::getStartDate));
+        return events;
     }
     @Override
     public Event deleteEventById(long id) throws Exception {
