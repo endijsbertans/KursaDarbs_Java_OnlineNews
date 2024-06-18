@@ -29,21 +29,14 @@ public class Person {
     @Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀČŅ]{1}[a-zēūīļķģšāžčņ]+")
     private String surname;
 
-    @NotNull
-    @Column(name = "PersonCode")
-    @Pattern(regexp = "\\d{5,6}-\\d{5}")
-    private String personCode;
-
 
 
     public Person(String name, String personCode, String surname){
         setName(name);
         setSurname(surname);
-        setPersonCode(personCode);
     }
 
     public Person(Person person) {
-        setPersonCode(person.getPersonCode());
         setName(person.getName());
         setSurname(person.getSurname());
     }
