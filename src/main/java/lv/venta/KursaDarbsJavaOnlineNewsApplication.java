@@ -1,8 +1,8 @@
 package lv.venta;
 
-import lv.venta.model.Advertisement;
-import lv.venta.model.Event;
+import lv.venta.model.*;
 import lv.venta.repo.IAdvertisementRepo;
+import lv.venta.repo.IEditorRepo;
 import lv.venta.repo.IEventRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,7 +21,7 @@ public class KursaDarbsJavaOnlineNewsApplication {
     @Bean
     public CommandLineRunner testDatabaseLayer(
             IAdvertisementRepo advertisementRepo,
-            IEventRepo eventRepo) {
+            IEventRepo eventRepo, IEditorRepo editorRepo) {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
@@ -35,6 +35,11 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 eventRepo.save(ev1);
                 eventRepo.save(ev2);
                 System.out.println("All events: " + eventRepo.findAll());
+
+                Person pers = new Person("Daniels","12345-12345", "Kalnas");
+                Editor ed1 = new Editor(pers, FieldOfOperation.sport);
+                editorRepo.save(ed1);
+                System.out.println("All editors: " + editorRepo.findAll());
             }
         };
     }

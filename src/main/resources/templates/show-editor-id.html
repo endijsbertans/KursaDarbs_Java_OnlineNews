@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Editor by ID</title>
+</head>
+<body>
+<h1 th:text="${title}">Editor by ID</h1>
+<div th:if="${myobj != null}">
+    <p><strong>ID:</strong> <span th:text="${myobj.idp}"></span></p>
+    <p><strong>Name:</strong> <span th:text="${myobj.name}"></span></p>
+    <p><strong>Surname:</strong> <span th:text="${myobj.surname}"></span></p>
+</div>
+<div th:if="${myobj == null}">
+    <p>Editor not found.</p>
+</div>
+<a href="/editor">Back to Editor List</a>
+</body>
+</html>

@@ -14,13 +14,9 @@ import lombok.ToString;
 @NoArgsConstructor
 public class User extends Person{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idU;
 
 
-
-    public User(Person person, FieldOfOperation fieldOfOperation) {
+    public User(Person person) {
         super(person);
 
     }
