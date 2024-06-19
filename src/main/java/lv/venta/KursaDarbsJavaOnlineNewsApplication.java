@@ -2,7 +2,11 @@ package lv.venta;
 
 import lv.venta.model.*;
 import lv.venta.repo.IAdvertisementRepo;
+
+import lv.venta.repo.IEditorRepo;
+
 import lv.venta.repo.IArticleRepo;
+
 import lv.venta.repo.IEventRepo;
 import lv.venta.repo.IReviewRepo;
 import org.springframework.boot.CommandLineRunner;
@@ -22,7 +26,11 @@ public class KursaDarbsJavaOnlineNewsApplication {
     @Bean
     public CommandLineRunner testDatabaseLayer(
             IAdvertisementRepo advertisementRepo,
-            IEventRepo eventRepo, IArticleRepo articleRepo, IReviewRepo reviewRepo) {
+            IEditorRepo editorRepo
+            IEventRepo eventRepo,
+            IArticleRepo articleRepo,
+            IReviewRepo reviewRepo) {
+
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
@@ -37,6 +45,12 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 eventRepo.save(ev2);
                 System.out.println("All events: " + eventRepo.findAll());
 
+
+                Person pers = new Person("Daniels","12345-12345", "Kalnas");
+                Editor ed1 = new Editor(pers, FieldOfOperation.sport);
+                editorRepo.save(ed1);
+                System.out.println("All editors: " + editorRepo.findAll());
+
                 Article article1 = new Article("Uguns", Genre.Urgent,"Endijs Ruda","Svētku dienā Juris cepot gaļu nodzedzināja lauku, kas beidzās slikti :(");
                 articleRepo.save(article1);
 
@@ -44,6 +58,7 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 Review review2 = new Review("Žēl ugunis karsts",article1);
                 reviewRepo.save(review1);
                 reviewRepo.save(review2);
+
             }
         };
     }
