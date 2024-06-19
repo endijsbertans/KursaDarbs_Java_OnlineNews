@@ -18,7 +18,7 @@ public class Editor extends Person {
     @Column(name = "field_of_operation")
     private FieldOfOperation fieldOfOperation;
 
-    // Constructor including the inherited fields
+
     public Editor(String name, String surname, FieldOfOperation fieldOfOperation) {
         super(name, surname);
         this.fieldOfOperation = fieldOfOperation;
