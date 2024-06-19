@@ -39,7 +39,12 @@ public class Advertisement {
     @Column(name = "Date")
     private LocalDateTime date;
 
-    public Advertisement(String title, float price, String description) {
+    @ManyToOne
+    @JoinColumn(name = "Author")
+    private RegisteredUser author;
+
+    public Advertisement(String title, float price, String description, RegisteredUser author) {
+        setAuthor(author);
         setTitle(title);
         setPrice(price);
         setDescription(description);

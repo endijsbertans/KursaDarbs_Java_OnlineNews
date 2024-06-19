@@ -46,7 +46,11 @@ public class Event {
     @Max(365)
     private int startTimeInDays;
 
-    public Event(String title, float price, String description, int startTimeInDays) {
+    @ManyToOne
+    @JoinColumn(name = "Author")
+    private RegisteredUser author;
+    public Event(String title, float price, String description, int startTimeInDays, RegisteredUser author) {
+        setAuthor(author);
         setTitle(title);
         setPrice(price);
         setDescription(description);

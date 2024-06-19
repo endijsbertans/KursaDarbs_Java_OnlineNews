@@ -34,7 +34,6 @@ public class Article {
     private Genre genre;
 
 
-    //pagaidam jagaida uz rudzu
     @ManyToOne
     @JoinColumn(name = "Author")
     private Editor author;
