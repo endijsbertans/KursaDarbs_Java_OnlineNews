@@ -14,8 +14,6 @@ import lombok.ToString;
 @NoArgsConstructor
 public class User extends Person{
 
-
-
     public User(Person person) {
         super(person);
 

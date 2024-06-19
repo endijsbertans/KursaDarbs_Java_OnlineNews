@@ -1,20 +1,15 @@
 package lv.venta;
 
 import lv.venta.model.*;
-import lv.venta.repo.IAdvertisementRepo;
+import lv.venta.repo.*;
 
-import lv.venta.repo.IEditorRepo;
-
-import lv.venta.repo.IArticleRepo;
-
-import lv.venta.repo.IEventRepo;
-import lv.venta.repo.IReviewRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @SpringBootApplication
 public class KursaDarbsJavaOnlineNewsApplication {
@@ -26,10 +21,11 @@ public class KursaDarbsJavaOnlineNewsApplication {
     @Bean
     public CommandLineRunner testDatabaseLayer(
             IAdvertisementRepo advertisementRepo,
-            IEditorRepo editorRepo
+            IEditorRepo editorRepo,
             IEventRepo eventRepo,
             IArticleRepo articleRepo,
-            IReviewRepo reviewRepo) {
+            IReviewRepo reviewRepo,
+            IPersonRepo personRepo){
 
         return new CommandLineRunner() {
             @Override
@@ -46,12 +42,13 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 System.out.println("All events: " + eventRepo.findAll());
 
 
-                Person pers = new Person("Daniels","12345-12345", "Kalnas");
+                Person pers = new Person("Daniels", "Kalnas");
                 Editor ed1 = new Editor(pers, FieldOfOperation.sport);
+                personRepo.save(pers);
                 editorRepo.save(ed1);
                 System.out.println("All editors: " + editorRepo.findAll());
 
-                Article article1 = new Article("Uguns", Genre.Urgent,"Endijs Ruda","Svētku dienā Juris cepot gaļu nodzedzināja lauku, kas beidzās slikti :(");
+                Article article1 = new Article("Uguns", Genre.Urgent,ed1,"Svētku dienā Juris cepot gaļu nodzedzināja lauku, kas beidzās slikti :(");
                 articleRepo.save(article1);
 
                 Review review1 = new Review("Šis ir bēdīgi",article1);

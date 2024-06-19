@@ -37,6 +37,7 @@ public class Event {
     @Column(name = "Description")
     private String description;
     // AUTORS
+    
     @Column(name = "startDate")
     private LocalDateTime startDate;
 
