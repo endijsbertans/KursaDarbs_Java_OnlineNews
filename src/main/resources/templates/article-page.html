@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Events</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:text="${title}"></a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/advertisement/show/all}">Show All Adverts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger" th:href="@{/event/show/all}">Show All Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger" th:href="@{/article/show/all}">Show All Articles</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-4">
+    <h2 th:text="${article.getTitle()}"></h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Idar</th>
+            <th>Genre</th>
+            <th>Author</th>
+            <th>Content</th>
+            <th>Date Posted</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tempPr: ${article}">
+            <td th:text="${tempPr.getIdar()}"></td>
+            <td th:text="${tempPr.getGenre()}"></td>
+            <td th:text="${tempPr.getAuthor()}"></td>
+            <td th:text="${tempPr.getContent()}"></td>
+            <td th:text="${tempPr.getDatePosted()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <h3>Komentari</h3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Message</th>
+            <th>Date Posted</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tempRew: ${article.getReview()}">
+            <td th:text="${tempRew.getMessage()}"></td>
+            <td th:text="${tempRew.getDatePosted()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
