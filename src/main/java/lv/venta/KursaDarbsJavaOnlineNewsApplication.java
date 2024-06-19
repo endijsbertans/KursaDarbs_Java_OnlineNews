@@ -36,9 +36,11 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 eventRepo.save(ev2);
                 System.out.println("All events: " + eventRepo.findAll());
 
-                Person pers = new Person("Daniels","12345-12345", "Kalnas");
-                Editor ed1 = new Editor(pers, FieldOfOperation.sport);
+
+                Editor ed1 = new Editor("Daniels", "Kalnas", FieldOfOperation.culture);
+                Editor ed2 = new Editor("Makis", "Purvins", FieldOfOperation.culture);
                 editorRepo.save(ed1);
+                editorRepo.save(ed2);
                 System.out.println("All editors: " + editorRepo.findAll());
             }
         };

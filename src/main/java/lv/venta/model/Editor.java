@@ -7,24 +7,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@Entity
 @Getter
 @Setter
-@ToString
-@Entity
 @NoArgsConstructor
 public class Editor extends Person {
 
     @Enumerated(EnumType.STRING)
-    @NotNull
+    @NotNull(message = "Field of Operation is required")
     @Column(name = "field_of_operation")
     private FieldOfOperation fieldOfOperation;
 
-
-//    @OneToMany(mappedBy = "editor", cascade = CascadeType.ALL)
-//    private List<Article> articles;
-
-    public Editor(Person person, FieldOfOperation fieldOfOperation) {
-        super(person);
+    // Constructor including the inherited fields
+    public Editor(String name, String surname, FieldOfOperation fieldOfOperation) {
+        super(name, surname);
         this.fieldOfOperation = fieldOfOperation;
     }
 }
