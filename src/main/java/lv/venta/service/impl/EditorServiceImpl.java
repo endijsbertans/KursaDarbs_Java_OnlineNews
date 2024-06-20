@@ -6,6 +6,8 @@ import lv.venta.service.IEditorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class EditorServiceImpl implements IEditorService {
 
@@ -13,15 +15,10 @@ public class EditorServiceImpl implements IEditorService {
     private IEditorRepo editorRepo;
 
 
-    @Override
-    public Editor selectEditorById(long id) throws Exception {
-        if(id < 0) throw new Exception("Id should be positive");
-        if(editorRepo.existsById(id))
-        {
-            return editorRepo.findById(id).get();
-        }
-        throw new Exception("Editor with " + id + " is not found");
-    }
+
+
+
+
 
     @Override
     public Editor deleteEditorById(long id) throws Exception {
