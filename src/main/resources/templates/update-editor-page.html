@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Editor</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav>
+    <h2>Edit Editor</h2>
+</nav>
+
+<h1>Edit Editor</h1>
+
+<form th:action="@{/editor/update/{id}(id=${editor.id})}" method="post" th:object="${editor}">
+    <input type="hidden" th:field="*{id}" />
+
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" required>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    </div>
+
+    <div>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" th:field="*{surname}" required>
+        <div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
+    </div>
+
+    <div>
+        <label for="fieldOfOperation">Field of Operation:</label>
+        <select id="fieldOfOperation" th:field="*{fieldOfOperation}" required>
+            <option value="">Please select</option>
+            <option th:each="operation : ${T(lv.venta.model.FieldOfOperation).values()}"
+                    th:value="${operation}" th:text="${operation}">
+            </option>
+        </select>
+        <div th:if="${#fields.hasErrors('fieldOfOperation')}" th:errors="*{fieldOfOperation}">Field of Operation Error</div>
+    </div>
+
+    <div>
+        <button type="submit">Update</button>
+    </div>
+</form>
+
+<a href="/editor/all">Back to List</a>
+
+</body>
+</html>

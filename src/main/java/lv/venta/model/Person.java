@@ -31,7 +31,7 @@ public class Person {
 
 
 
-    public Person(String name, String surname){
+    public Person(String name, String personCode, String surname){
         setName(name);
         setSurname(surname);
     }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Editor</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<h1>Add Editor</h1>
+<form th:action="@{/editor/add}" th:object="${editor}" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" required>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    </div>
+    <div>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" th:field="*{surname}" required>
+        <div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
+    </div>
+    <div>
+        <label for="fieldOfOperation">Field of Operation:</label>
+        <select id="fieldOfOperation" th:field="*{fieldOfOperation}" required>
+            <option value="">Please select</option>
+            <option th:each="operation : ${T(lv.venta.model.FieldOfOperation).values()}"
+                    th:value="${operation}" th:text="${operation}">
+            </option>
+        </select>
+        <div th:if="${#fields.hasErrors('fieldOfOperation')}" th:errors="*{fieldOfOperation}">Field of Operation Error</div>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+<div>
+    <a href="/editor/all">Back to List</a>
+</div>
+</body>
+</html>
