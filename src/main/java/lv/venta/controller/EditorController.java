@@ -78,7 +78,7 @@ public class EditorController {
     }
 
     @PostMapping("/update/{id}")
-    public String postDriverUpdate(@PathVariable("id") long id, @Valid Editor editor, BindingResult result, Model model) {
+    public String postEditorUpdate(@PathVariable("id") long id, @Valid Editor editor, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("id", id);
             return "update-editor-page";
