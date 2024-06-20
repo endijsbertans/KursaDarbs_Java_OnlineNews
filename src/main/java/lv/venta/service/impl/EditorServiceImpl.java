@@ -6,12 +6,20 @@ import lv.venta.service.IEditorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class EditorServiceImpl implements IEditorService {
 
     @Autowired
     private IEditorRepo editorRepo;
 
+
+
+    @Override
+    public ArrayList<Editor> getAllEditors() throws Exception {
+        return (ArrayList<Editor>) editorRepo.findAll();
+    }
 
     @Override
     public Editor selectEditorById(long id) throws Exception {
