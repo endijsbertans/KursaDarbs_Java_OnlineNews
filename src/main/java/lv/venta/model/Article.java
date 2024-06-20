@@ -34,11 +34,9 @@ public class Article {
     private Genre genre;
 
 
-    //pagaidam jagaida uz rudzu
-    @NotNull
-    @Size(min = 3, max = 50)
-    @Column(name = "Author")
-    private String author;
+    @ManyToOne
+    @JoinColumn(name = "Author")
+    private Editor author;
 
 
     @NotNull
@@ -49,12 +47,12 @@ public class Article {
     @Column(name = "DatePosted")
     private LocalDate datePosted  = LocalDate.now();
 
-    @OneToMany(mappedBy = "article")
+    @OneToMany
     private List<Review> review = new ArrayList<>();
 
 
 
-    public Article( String title, Genre genre, String author, String content) {
+    public Article( String title, Genre genre, Editor author, String content) {
         setTitle(title);
         setGenre(genre);
         setAuthor(author);

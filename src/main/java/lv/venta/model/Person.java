@@ -1,35 +1,43 @@
 package lv.venta.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NoArgsConstructor
-@MappedSuperclass
 public class Person {
 
+    @Setter(value = AccessLevel.NONE)
+    @Column(name = "Idp")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long idp;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "Name")
+    @Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀČŅ]{1}[a-zēūīļķģšāžčņ]+")
     private String name;
 
-    @Column(name = "surname")
+    @NotNull
+    @Column(name = "Surname")
+    @Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀČŅ]{1}[a-zēūīļķģšāžčņ]+")
     private String surname;
 
-    public Person(String name, String surname) {
-        this.name = name;
-        this.surname = surname;
+
+
+    public Person(String name, String personCode, String surname){
+        setName(name);
+        setSurname(surname);
     }
 
     public Person(Person person) {
-        this.name = person.getName();
-        this.surname = person.getSurname();
+        setName(person.getName());
+        setSurname(person.getSurname());
     }
 }
