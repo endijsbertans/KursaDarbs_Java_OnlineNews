@@ -6,14 +6,17 @@
 </head>
 <body>
 <h1 th:text="${title}">Editor by ID</h1>
+
 <div th:if="${myobj != null}">
     <p><strong>ID:</strong> <span th:text="${myobj.id}"></span></p>
-    <p><strong>Name:</strong> <span th:text="${myobj.name}"></span></p>
-    <p><strong>Surname:</strong> <span th:text="${myobj.surname}"></span></p>
+    <p><strong>Username:</strong> <span th:text="${myobj.username}"></span></p>
+    <p><strong>Field of Operation:</strong> <span th:text="${myobj.fieldOfOperation}"></span></p>
 </div>
+
 <div th:if="${myobj == null}">
     <p>Editor not found.</p>
 </div>
-<a href="/editor">Back to Editor List</a>
+
+<a href="/editor/all">Back to Editor List</a>
 </body>
 </html>

@@ -51,6 +51,12 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/advertisement/remove/*").hasAuthority("ADMIN")
                         .requestMatchers("/advertisement/add").hasAuthority("ADMIN")
                         .requestMatchers("/advertisement/update/*").hasAuthority("ADMIN")
+                        .requestMatchers("/editor/all").permitAll()
+                        .requestMatchers("/editor/remove/*").permitAll()
+                        .requestMatchers("/editor/add").permitAll()
+                        .requestMatchers("/editor/update/*").permitAll()
+
+
                 );
 
         http.formLogin(form -> form.permitAll());
