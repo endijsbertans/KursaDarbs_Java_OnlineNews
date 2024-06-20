@@ -57,6 +57,7 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 userRepo.save(u1);
                 a1.addUser(u1);
                 authRepo.save(a1);
+                System.out.println("All users: " + userRepo.findAll());
             }
         };
     }
