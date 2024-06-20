@@ -26,7 +26,7 @@ public class KursaDarbsJavaOnlineNewsApplication {
     @Bean
     public CommandLineRunner testDatabaseLayer(
             IAdvertisementRepo advertisementRepo,
-            IEditorRepo editorRepo
+            IEditorRepo editorRepo,
             IEventRepo eventRepo,
             IArticleRepo articleRepo,
             IReviewRepo reviewRepo) {
