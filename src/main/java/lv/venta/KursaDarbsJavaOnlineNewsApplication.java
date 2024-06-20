@@ -1,18 +1,14 @@
 package lv.venta;
 
 import lv.venta.model.*;
-import lv.venta.repo.IAdvertisementRepo;
+import lv.venta.repo.*;
 
-import lv.venta.repo.IEditorRepo;
-
-import lv.venta.repo.IArticleRepo;
-
-import lv.venta.repo.IEventRepo;
-import lv.venta.repo.IReviewRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -29,29 +25,24 @@ public class KursaDarbsJavaOnlineNewsApplication {
             IEditorRepo editorRepo,
             IEventRepo eventRepo,
             IArticleRepo articleRepo,
-            IReviewRepo reviewRepo) {
+            IReviewRepo reviewRepo,
+            IPersonRepo personRepo,
+            IMyAuthorityRepo authRepo, IMyUserRepo userRepo){
 
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                Advertisement ad1 = new Advertisement("Ad1", 1.0f, "Ad1 desc");
-                Advertisement ad2 = new Advertisement("Ad2", 2.0f, "Ad2 desc");
-                advertisementRepo.save(ad1);
-                advertisementRepo.save(ad2);
-                System.out.println("All ads: " + advertisementRepo.findAll());
-                Event ev1 = new Event("Ev1", 1.0f, "Ev1 desc", 2);
-                Event ev2 = new Event("Ev2", 2.0f, "Ev2 desc", 3);
-                eventRepo.save(ev1);
-                eventRepo.save(ev2);
-                System.out.println("All events: " + eventRepo.findAll());
 
-
-                Person pers = new Person("Daniels","12345-12345", "Kalnas");
+                Person pers = new Person("Daniels", "Kalnas");
                 Editor ed1 = new Editor(pers, FieldOfOperation.sport);
+                personRepo.save(pers);
                 editorRepo.save(ed1);
                 System.out.println("All editors: " + editorRepo.findAll());
 
-                Article article1 = new Article("Uguns", Genre.Urgent,"Endijs Ruda","Svētku dienā Juris cepot gaļu nodzedzināja lauku, kas beidzās slikti :(");
+                Person pers2 = new Person("Endijs", "Bmwe");
+                personRepo.save(pers2);
+
+                Article article1 = new Article("Uguns", Genre.Urgent,ed1,"Svētku dienā Juris cepot gaļu nodzedzināja lauku, kas beidzās slikti :(");
                 articleRepo.save(article1);
 
                 Review review1 = new Review("Šis ir bēdīgi",article1);
@@ -59,6 +50,13 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 reviewRepo.save(review1);
                 reviewRepo.save(review2);
 
+                MyAuthority a1 = new MyAuthority("ADMIN");
+                authRepo.save(a1);
+                PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+                MyUser u1 = new MyUser("admin", encoder.encode("123456"), a1);
+                userRepo.save(u1);
+                a1.addUser(u1);
+                authRepo.save(a1);
             }
         };
     }
