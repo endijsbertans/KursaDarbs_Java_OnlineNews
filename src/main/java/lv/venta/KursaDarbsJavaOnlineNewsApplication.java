@@ -3,6 +3,7 @@ package lv.venta;
 import lv.venta.model.*;
 import lv.venta.repo.*;
 
+import lv.venta.service.impl.ReviewServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,7 +28,7 @@ public class KursaDarbsJavaOnlineNewsApplication {
             IArticleRepo articleRepo,
             IReviewRepo reviewRepo,
             IPersonRepo personRepo,
-            IMyAuthorityRepo authRepo, IMyUserRepo userRepo){
+            IMyAuthorityRepo authRepo, IMyUserRepo userRepo, ReviewServiceImpl test){
 
         return new CommandLineRunner() {
             @Override
@@ -50,6 +51,8 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 reviewRepo.save(review1);
                 reviewRepo.save(review2);
 
+
+
                 MyAuthority a1 = new MyAuthority("ADMIN");
                 authRepo.save(a1);
                 PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -58,6 +61,8 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 a1.addUser(u1);
                 authRepo.save(a1);
                 System.out.println("All users: " + userRepo.findAll());
+                System.out.println(article1);
+
             }
         };
     }

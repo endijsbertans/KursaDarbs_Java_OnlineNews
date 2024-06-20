@@ -33,13 +33,16 @@ public class ReviewServiceImpl implements IReviewService {
     }
 
     @Override
-    public void deleteReview(long id)  throws Exception{
+    public Review deleteReview(long id)  throws Exception{
         if(id <= 0){
             throw new Exception("Reviews id input is wrong");
         }
 
+
         if(reviewRepo.existsById(id)){
+            Review review = reviewRepo.findById(id).get();
             reviewRepo.deleteById(id);
+            return review;
         }else{
             throw new Exception("Review not found");
         }
@@ -64,7 +67,7 @@ public class ReviewServiceImpl implements IReviewService {
     public ArrayList<Review> getReviewsByArticleId(long id) throws Exception {
 
         if(id <= 0){
-            throw new Exception("Article id input is wrong");
+            throw new Exception("Review id input is wrong");
         }
 
         ArrayList<Review> reviews = new ArrayList<>();
@@ -80,5 +83,36 @@ public class ReviewServiceImpl implements IReviewService {
             throw new Exception("Article not found");
         }
         return reviews;
+    }
+
+    @Override
+    public long FindArticleIDByReviewId(long id) throws Exception {
+        if(id <= 0){
+            throw new Exception("Review id input is wrong");
+        }
+
+        Review review = reviewRepo.findById(id).get();
+
+        Article article = review.getArticle();
+
+        long idf = article.getIdar();
+
+        return idf;
+
+    }
+
+    @Override
+    public Review getReviewById(long id) throws Exception {
+        if(id <= 0){
+            throw new Exception("Review id input is wrong");
+        }
+
+        if(reviewRepo.findById(id).isPresent()){
+            Review review = reviewRepo.findById(id).get();
+            return review;
+        } else{
+            throw new Exception("There is no article with this id");
+        }
+
     }
 }
