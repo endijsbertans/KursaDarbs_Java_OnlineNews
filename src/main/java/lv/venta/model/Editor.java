@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 @Getter
 @Setter
 @ToString
@@ -23,15 +20,8 @@ public class Editor extends Person {
     private FieldOfOperation fieldOfOperation;
 
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    @ToString.Exclude
-    private Collection<Article> articles;
-    @PreRemove
-    private void preRemove() {
-        for (Article article : articles) {
-            article.setAuthor(null);
-        }
-    }
+//    @OneToMany(mappedBy = "editor", cascade = CascadeType.ALL)
+//    private List<Article> articles;
 
     public Editor(Person person, FieldOfOperation fieldOfOperation) {
         super(person);

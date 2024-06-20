@@ -6,12 +6,20 @@ import lv.venta.service.IEditorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class EditorServiceImpl implements IEditorService {
 
     @Autowired
     private IEditorRepo editorRepo;
 
+
+    @Override
+    public ArrayList<Editor> getAllEditors() throws Exception {
+        return (ArrayList<Editor>) editorRepo.findAll();
+
+    }
 
     @Override
     public Editor selectEditorById(long id) throws Exception {
@@ -43,9 +51,11 @@ public class EditorServiceImpl implements IEditorService {
 
     @Override
     public Editor updateEditorById(long id, Editor editor) throws Exception {
-        Editor updateDriver = selectEditorById(id);
-        updateDriver.setName(editor.getName());
-        updateDriver.setSurname(editor.getSurname());
-        return editorRepo.save(updateDriver);
+        Editor updateEditor = selectEditorById(id);
+        updateEditor.setName(editor.getName());
+        updateEditor.setSurname(editor.getSurname());
+        updateEditor.setFieldOfOperation(editor.getFieldOfOperation());
+        return editorRepo.save(updateEditor);
+
     }
 }
