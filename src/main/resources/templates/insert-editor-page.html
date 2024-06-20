@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Editor</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Add Editor</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
 <h1>Add Editor</h1>
 <form th:action="@{/editor/add}" th:object="${editor}" method="post">
     <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" th:field="*{name}" required>
-        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" th:field="*{username}" required>
+        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div>
     </div>
     <div>
-        <label for="surname">Surname:</label>
-        <input type="text" id="surname" th:field="*{surname}" required>
-        <div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}" required>
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
     </div>
     <div>
         <label for="fieldOfOperation">Field of Operation:</label>
@@ -33,7 +33,7 @@
     </div>
 </form>
 <div>
-    <a href="/editor/all">Back to List</a>
+    <a th:href="@{/editor/all}">Back to List</a>
 </div>
 </body>
 </html>

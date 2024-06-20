@@ -20,10 +20,9 @@ import java.util.Collection;
 @Entity
 public class MyUser {
 
-    @Column(name = "Idu")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idu;
+    private Long id;  // Rename to id
 
     @NotNull
     @Pattern(regexp = "[A-Za-z.]+")
@@ -36,25 +35,22 @@ public class MyUser {
     private String password;
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
-    private Collection<MyAuthority> authorities = new ArrayList<MyAuthority>();
+    private Collection<MyAuthority> authorities = new ArrayList<>();
 
-
-    public MyUser (String username, String password, MyAuthority ... auths) {
+    public MyUser(String username, String password, MyAuthority... auths) {
         setUsername(username);
         setPassword(password);
-        for(MyAuthority tempA: auths)
+        for (MyAuthority tempA : auths)
             addAuthority(tempA);
     }
 
-
     public void addAuthority(MyAuthority authority) {
-        if(!authorities.contains(authority))
+        if (!authorities.contains(authority))
             authorities.add(authority);
     }
 
     public void removeAuthority(MyAuthority authority) {
-        if(authorities.contains(authority))
+        if (authorities.contains(authority))
             authorities.remove(authority);
     }
-
 }
