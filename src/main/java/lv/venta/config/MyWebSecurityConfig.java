@@ -39,23 +39,25 @@ public class MyWebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").hasAuthority("ADMIN")
                         .requestMatchers("/").permitAll()
+                        .requestMatchers("/h2-console").permitAll()
                         .requestMatchers("/event/show/all").permitAll()
-                        .requestMatchers("/event/remove/{id}").hasAuthority("ADMIN")//tikai adminam
+                        .requestMatchers("/event/remove/{id}").permitAll()//tikai adminam
                         .requestMatchers("/event/add").permitAll()
                         .requestMatchers("/event/update/*").permitAll()
                         .requestMatchers("/article/show/all").permitAll()
-                        .requestMatchers("/article/remove/*").hasAuthority("ADMIN")
-                        .requestMatchers("/article/add/*").hasAuthority("ADMIN")
-                        .requestMatchers("/article/update/*").hasAuthority("ADMIN")
-                        .requestMatchers("/article/articleById/**").permitAll()
+                        .requestMatchers("/article/remove/*").permitAll()
+                        .requestMatchers("/article/add/**").permitAll()
+                        .requestMatchers("/article/update/*").permitAll()
+                        .requestMatchers("/article/articleById/*").permitAll()
                         .requestMatchers("/advertisement/show/all").permitAll()
-                        .requestMatchers("/advertisement/remove/*").hasAnyAuthority("ADMIN","USER")
-                        .requestMatchers("/advertisement/add").hasAuthority("ADMIN")
-                        .requestMatchers("/advertisement/update/*").hasAuthority("ADMIN")
-                        .requestMatchers("/editor/all").permitAll()
-                        .requestMatchers("/editor/remove/*").permitAll()
-                        .requestMatchers("/editor/add").permitAll()
-                        .requestMatchers("/editor/update/*").permitAll()
+                        .requestMatchers("/advertisement/remove/*").permitAll()
+                        .requestMatchers("/advertisement/add").permitAll()
+                        .requestMatchers("/advertisement/update/*").permitAll()
+                        .requestMatchers("/review/remove/*").permitAll()
+                        .requestMatchers("/review/add/**").permitAll()
+                        .requestMatchers("/review/update/**").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
+
                 );
 
         http.formLogin(form -> form.permitAll());
