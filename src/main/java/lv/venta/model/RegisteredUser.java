@@ -13,7 +13,7 @@ import java.util.Collection;
 @ToString
 @Entity
 @NoArgsConstructor
-public class RegisteredUser extends Person{
+public class RegisteredUser extends MyUser{
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     @ToString.Exclude
     private Collection<Advertisement> adverts;
@@ -30,8 +30,8 @@ public class RegisteredUser extends Person{
             event.setAuthor(null);
         }
     }
-    public RegisteredUser(Person person) {
-        super(person);
+    public RegisteredUser(MyUser user) {
+        super(user.getUsername(), user.getPassword());
     }
 
 }
