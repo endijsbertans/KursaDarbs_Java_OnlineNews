@@ -6,8 +6,6 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -17,12 +15,10 @@ import java.util.List;
 @Entity
 public class JokePage {
 
-
-    @Setter(value = AccessLevel.NONE)
-    @Column(name = "Idar")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private int  idJo;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "Idar")
+    private int idJo;
 
     @NotNull
     @Size(min = 3, max = 50)
@@ -39,18 +35,16 @@ public class JokePage {
     private String content;
 
     @Column(name = "DatePosted")
-    private LocalDate datePosted  = LocalDate.now();
+    private LocalDate datePosted = LocalDate.now();
 
-    @OneToMany
-    private List<Review> review = new ArrayList<>();
+    @Column(name = "ImageFilename")
+    private String imageFilename;
 
-
-
-    public JokePage( String title, Genre genre, Editor author, String content) {
-        setTitle(title);
-        setAuthor(author);
-        setContent(content);
-        setDatePosted(LocalDate.now());
+    // Constructors, getters, setters, etc.
+    public JokePage(String title, Editor author, String content) {
+        this.title = title;
+        this.author = author;
+        this.content = content;
+        this.datePosted = LocalDate.now();
     }
-
 }
