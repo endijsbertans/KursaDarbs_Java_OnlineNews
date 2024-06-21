@@ -36,11 +36,12 @@ public class MyWebSecurityConfig {
     public SecurityFilterChain configureEndpoints(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(auth -> auth
+
                         .requestMatchers("/h2-console/**").hasAuthority("ADMIN")
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/h2-console").permitAll()
                         .requestMatchers("/event/show/all").permitAll()
-                        .requestMatchers("/event/remove/{id}").permitAll()//tikai adminam
+                        .requestMatchers("/event/remove/{id}").permitAll()
                         .requestMatchers("/event/add").permitAll()
                         .requestMatchers("/event/update/*").permitAll()
                         .requestMatchers("/article/show/all").permitAll()
@@ -56,15 +57,17 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/editor/remove/*").permitAll()
                         .requestMatchers("/editor/add").permitAll()
                         .requestMatchers("/editor/update/*").permitAll()
+
                         .requestMatchers("/joke/all").permitAll()
                         .requestMatchers("/joke/remove/*").permitAll()
-                        .requestMatchers("/joke/add").permitAll()
                         .requestMatchers("/joke/update/*").permitAll()
+                        .requestMatchers("/joke/add").permitAll()
+
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/review/remove/*").permitAll()
                         .requestMatchers("/review/add/**").permitAll()
                         .requestMatchers("/review/update/**").permitAll()
-
+                        .requestMatchers("/error/**").permitAll()
 
                 );
 
