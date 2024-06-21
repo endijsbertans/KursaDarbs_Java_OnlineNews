@@ -37,6 +37,7 @@ public class MyWebSecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/h2-console/**").hasAuthority("ADMIN")
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/event/show/all").permitAll()
                         .requestMatchers("/event/remove/{id}").hasAuthority("ADMIN")//tikai adminam
@@ -46,9 +47,9 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/article/remove/*").hasAuthority("ADMIN")
                         .requestMatchers("/article/add/*").hasAuthority("ADMIN")
                         .requestMatchers("/article/update/*").hasAuthority("ADMIN")
-                        .requestMatchers("/article/articleById/*").hasAuthority("USER")
+                        .requestMatchers("/article/articleById/**").permitAll()
                         .requestMatchers("/advertisement/show/all").permitAll()
-                        .requestMatchers("/advertisement/remove/*").hasAuthority("ADMIN")
+                        .requestMatchers("/advertisement/remove/*").hasAnyAuthority("ADMIN","USER")
                         .requestMatchers("/advertisement/add").hasAuthority("ADMIN")
                         .requestMatchers("/advertisement/update/*").hasAuthority("ADMIN")
                         .requestMatchers("/editor/all").permitAll()
