@@ -35,8 +35,7 @@ public class MyWebSecurityConfig {
     @Bean
     public SecurityFilterChain configureEndpoints(HttpSecurity http) throws Exception {
 
-        http
-                .authorizeHttpRequests(auth -> auth
+        http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").hasAuthority("ADMIN")
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/h2-console").permitAll()
@@ -50,7 +49,6 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/article/update/*").permitAll()
                         .requestMatchers("/article/articleById/*").permitAll()
                         .requestMatchers("/advertisement/show/all").permitAll()
-
                         .requestMatchers("/advertisement/remove/*").hasAnyAuthority("ADMIN","USER")
                         .requestMatchers("/advertisement/add").hasAuthority("ADMIN")
                         .requestMatchers("/advertisement/update/*").hasAuthority("ADMIN")
@@ -63,8 +61,6 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/joke/add").permitAll()
                         .requestMatchers("/joke/update/*").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
-
-
                         .requestMatchers("/review/remove/*").permitAll()
                         .requestMatchers("/review/add/**").permitAll()
                         .requestMatchers("/review/update/**").permitAll()
