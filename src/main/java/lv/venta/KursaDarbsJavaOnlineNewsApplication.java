@@ -40,8 +40,8 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 MyAuthority a1 = new MyAuthority("ADMIN");
                 authRepo.save(a1);
                 PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-                MyUser u1 = new MyUser("admin", encoder.encode("123456"), a1);
-                Editor ed1 = new Editor("daniels.kalnas", encoder.encode("123456"), FieldOfOperation.sport, a1);
+                MyUser u1 = new MyUser("Karli","Lauva", "admin", encoder.encode("123456"), a1);
+                Editor ed1 = new Editor("Daniels", "Kalnavs","daniels.kalnas", encoder.encode("123456"), FieldOfOperation.sport, a1);
                 userRepo.save(u1);
                 a1.addUser(u1);
                 authRepo.save(a1);

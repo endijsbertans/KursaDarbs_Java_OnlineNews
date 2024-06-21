@@ -37,6 +37,7 @@ public class MyWebSecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/h2-console/**").hasAuthority("ADMIN")
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/event/show/all").permitAll()
                         .requestMatchers("/event/remove/{id}").hasAuthority("ADMIN")//tikai adminam
@@ -55,8 +56,6 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/editor/remove/*").permitAll()
                         .requestMatchers("/editor/add").permitAll()
                         .requestMatchers("/editor/update/*").permitAll()
-
-
                 );
 
         http.formLogin(form -> form.permitAll());

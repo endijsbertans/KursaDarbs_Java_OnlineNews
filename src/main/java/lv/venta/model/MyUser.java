@@ -18,6 +18,7 @@ import java.util.Collection;
 @ToString
 @Table(name="UserTable")
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class MyUser {
 
     @Id
@@ -31,13 +32,27 @@ public class MyUser {
     private String username;
 
     @NotNull
+    @Pattern(regexp = "[A-Za-z.]+")
+    @Size(min = 3, max = 20)
+    @Column(name = "Name")
+    private String name;
+
+    @NotNull
+    @Pattern(regexp = "[A-Za-z.]+")
+    @Size(min = 3, max = 20)
+    @Column(name = "Surname")
+    private String surname;
+
+    @NotNull
     @Column(name = "Password")
     private String password;
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private Collection<MyAuthority> authorities = new ArrayList<>();
 
-    public MyUser(String username, String password, MyAuthority... auths) {
+    public MyUser(String name, String surname, String username, String password, MyAuthority... auths) {
+        setName(name);
+        setSurname(surname);
         setUsername(username);
         setPassword(password);
         for (MyAuthority tempA : auths)
