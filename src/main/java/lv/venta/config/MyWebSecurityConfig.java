@@ -37,6 +37,7 @@ public class MyWebSecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/h2-console/**").hasAuthority("ADMIN")
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/h2-console").permitAll()
                         .requestMatchers("/event/show/all").permitAll()
@@ -56,6 +57,7 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/review/add/**").permitAll()
                         .requestMatchers("/review/update/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
+
                 );
 
         http.formLogin(form -> form.permitAll());
