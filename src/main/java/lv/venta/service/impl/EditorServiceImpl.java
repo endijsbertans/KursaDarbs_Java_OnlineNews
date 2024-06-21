@@ -9,17 +9,15 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Optional;
 
+
 @Service
 public class EditorServiceImpl implements IEditorService {
-
     @Autowired
     private IEditorRepo editorRepo;
-
     @Override
     public ArrayList<Editor> getAllEditors() throws Exception {
         return (ArrayList<Editor>) editorRepo.findAll();
     }
-
     @Override
     public Editor selectEditorById(long id) throws Exception {
         if (id < 0) throw new Exception("Id should be positive");
@@ -29,7 +27,6 @@ public class EditorServiceImpl implements IEditorService {
         }
         throw new Exception("Editor with ID " + id + " is not found");
     }
-
     @Override
     public Editor deleteEditorById(long id) throws Exception {
         Editor deleteEditor = selectEditorById(id);
