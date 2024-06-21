@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>All Events</title>
+    <title th:text="${title}">Article Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
@@ -35,12 +35,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="tempPr: ${article}">
-            <td th:text="${tempPr.getIdar()}"></td>
-            <td th:text="${tempPr.getGenre()}"></td>
-            <td th:text="${tempPr.getAuthor()}"></td>
-            <td th:text="${tempPr.getContent()}"></td>
-            <td th:text="${tempPr.getDatePosted()}"></td>
+        <tr th:each="tempPr : ${article}">
+            <td th:text="${tempPr.idar}"></td>
+            <td th:text="${tempPr.genre}"></td>
+            <td th:text="${tempPr.author}"></td>
+            <td th:text="${tempPr.content}"></td>
+            <td th:text="${tempPr.datePosted}"></td>
         </tr>
         </tbody>
     </table>
@@ -50,15 +50,22 @@
         <tr>
             <th>Message</th>
             <th>Date Posted</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="tempRew: ${article.getReview()}">
-            <td th:text="${tempRew.getMessage()}"></td>
-            <td th:text="${tempRew.getDatePosted()}"></td>
+        <tr th:each="tempRew : ${article.review}">
+            <td th:text="${tempRew.message}"></td>
+            <td th:text="${tempRew.datePosted}"></td>
+            <td>
+                <a th:href="@{'/review/update/' + ${tempRew.idre}}" class="btn btn-primary btn-sm">update</a>
+                <a th:href="@{'/review/remove/' + ${tempRew.idre}}" class="btn btn-danger btn-sm">Delete</a>
+
+            </td>
         </tr>
         </tbody>
     </table>
+    <a th:href="@{'/review/add/' + ${article.idar}}" class="btn btn-primary mt-4">Add Review</a>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

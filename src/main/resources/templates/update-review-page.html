@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Review</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:text="${title}"></a>
+</nav>
+<div class="container mt-4">
+    <h2>Update Review</h2>
+    <form th:action="@{'/review/update/' + ${review.idre}}" th:object="${review}" method="post">
+        <input type="hidden" name="id" th:value="${review.idre}" />
+        <input type="hidden" name="articleId" th:value="${articleId}" />
+
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="3" th:text="${review.message}" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Review</button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
