@@ -13,12 +13,8 @@ import java.util.Collection;
 @ToString(callSuper = true)
 @Entity
 @NoArgsConstructor
-<<<<<<< HEAD
-public class RegisteredUser extends MyUser {
 
-=======
 public class RegisteredUser extends MyUser{
->>>>>>> Endijs
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     @ToString.Exclude
     private Collection<Advertisement> adverts;
@@ -36,19 +32,9 @@ public class RegisteredUser extends MyUser{
             event.setAuthor(null);
         }
     }
-<<<<<<< HEAD
 
-    public RegisteredUser(String username, String password) {
-        super(username, password);
-=======
     public RegisteredUser(String name, String surname, MyUser user) {
         super(name, surname, user.getUsername(), user.getPassword());
->>>>>>> Endijs
     }
 
-    public RegisteredUser(MyUser myUser) {
-        super(myUser.getUsername(), myUser.getPassword());
-        this.setId(myUser.getId());
-        this.setAuthorities(myUser.getAuthorities());
-    }
 }
