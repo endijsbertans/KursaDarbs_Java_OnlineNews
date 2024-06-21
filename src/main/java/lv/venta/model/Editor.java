@@ -33,8 +33,8 @@ public class Editor extends MyUser {
         }
     }
 
-    public Editor(String username, String password, FieldOfOperation fieldOfOperation, MyAuthority... auths) {
-        super(username, password, auths);
+    public Editor(String name, String surname, String username, String password, FieldOfOperation fieldOfOperation, MyAuthority... auths) {
+        super(name, surname, username, password, auths);
         this.fieldOfOperation = fieldOfOperation;
     }
 }

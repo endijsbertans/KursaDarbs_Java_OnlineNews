@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @ToString
+
 @Table(name = "Advert_TABLE")
 @Entity
 public class Advertisement {

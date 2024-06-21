@@ -30,8 +30,8 @@ public class RegisteredUser extends MyUser{
             event.setAuthor(null);
         }
     }
-    public RegisteredUser(MyUser user) {
-        super(user.getUsername(), user.getPassword());
+    public RegisteredUser(String name, String surname, MyUser user) {
+        super(name, surname, user.getUsername(), user.getPassword());
     }
 
 }
