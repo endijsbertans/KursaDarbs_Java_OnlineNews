@@ -3,6 +3,7 @@ package lv.venta;
 import lv.venta.model.*;
 import lv.venta.repo.*;
 
+import lv.venta.service.impl.ReviewServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,14 +28,22 @@ public class KursaDarbsJavaOnlineNewsApplication {
             IArticleRepo articleRepo,
             IReviewRepo reviewRepo,
 <<<<<<< HEAD
+<<<<<<< HEAD
             IJokePageRepo jokePageRepo,
 =======
 >>>>>>> Endijs
             IMyAuthorityRepo authRepo, IMyUserRepo userRepo){
+=======
+            IPersonRepo personRepo,
+            IMyAuthorityRepo authRepo, IMyUserRepo userRepo, ReviewServiceImpl test){
+
+>>>>>>> 36e4b2b2455ec5243e529378861fcca9c78b7e08
 
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
+
+
 
 
 
@@ -50,6 +59,7 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 a1.addUser(u1);
                 authRepo.save(a1);
                 System.out.println("All users: " + userRepo.findAll());
+
                 editorRepo.save(ed1);
                 System.out.println("All editors: " + editorRepo.findAll());
 

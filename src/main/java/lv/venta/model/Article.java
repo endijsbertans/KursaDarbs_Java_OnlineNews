@@ -47,7 +47,7 @@ public class Article {
     @Column(name = "DatePosted")
     private LocalDate datePosted  = LocalDate.now();
 
-    @OneToMany
+    @OneToMany(mappedBy = "article")
     private List<Review> review = new ArrayList<>();
 
 

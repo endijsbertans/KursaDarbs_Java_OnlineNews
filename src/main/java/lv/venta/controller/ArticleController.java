@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lv.venta.model.Article;
 import lv.venta.model.Event;
 import lv.venta.service.IArticleService;
+import lv.venta.service.IEditorService;
 import lv.venta.service.IReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,8 @@ public class ArticleController {
 
     @Autowired
     private IArticleService articleService;
+
+
 
 
 
@@ -52,7 +55,7 @@ public class ArticleController {
     }
 
     @GetMapping("/add")
-    public String getArticleAdd(Model model){
+    public String getArticleAdd(Model model) throws Exception {
         model.addAttribute("title", "Add article");
         model.addAttribute("article", new Article());
         return "insert-article-page";
@@ -63,7 +66,7 @@ public class ArticleController {
         if(result.hasErrors()){
             System.out.println(article);
             System.out.println(result);
-            return "insert-event-page";
+            return "insert-article-page";
         }else{
             try {
                 articleService.addArticle(article);
