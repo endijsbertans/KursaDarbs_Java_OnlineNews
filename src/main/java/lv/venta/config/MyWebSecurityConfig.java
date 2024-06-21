@@ -50,7 +50,7 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/article/update/*").permitAll()
                         .requestMatchers("/article/articleById/*").permitAll()
                         .requestMatchers("/advertisement/show/all").permitAll()
-<<<<<<< HEAD
+
                         .requestMatchers("/advertisement/remove/*").hasAnyAuthority("ADMIN","USER")
                         .requestMatchers("/advertisement/add").hasAuthority("ADMIN")
                         .requestMatchers("/advertisement/update/*").hasAuthority("ADMIN")
@@ -65,16 +65,11 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/h2-console/**").permitAll()
 
 
-=======
-                        .requestMatchers("/advertisement/remove/*").permitAll()
-                        .requestMatchers("/advertisement/add").permitAll()
-                        .requestMatchers("/advertisement/update/*").permitAll()
                         .requestMatchers("/review/remove/*").permitAll()
                         .requestMatchers("/review/add/**").permitAll()
                         .requestMatchers("/review/update/**").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll()
 
->>>>>>> 36e4b2b2455ec5243e529378861fcca9c78b7e08
+
                 );
 
         http.formLogin(form -> form.permitAll());

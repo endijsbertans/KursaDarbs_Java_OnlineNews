@@ -29,6 +29,7 @@ public class KursaDarbsJavaOnlineNewsApplication {
             IReviewRepo reviewRepo,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             IJokePageRepo jokePageRepo,
 =======
 >>>>>>> Endijs
@@ -38,6 +39,14 @@ public class KursaDarbsJavaOnlineNewsApplication {
             IMyAuthorityRepo authRepo, IMyUserRepo userRepo, ReviewServiceImpl test){
 
 >>>>>>> 36e4b2b2455ec5243e529378861fcca9c78b7e08
+=======
+
+            IJokePageRepo jokePageRepo,
+
+            IPersonRepo personRepo,
+            IMyAuthorityRepo authRepo, IMyUserRepo userRepo, ReviewServiceImpl test){
+
+>>>>>>> 75d214eb83771a823608c78415a52c04323fb874
 
         return new CommandLineRunner() {
             @Override
@@ -63,7 +72,7 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 editorRepo.save(ed1);
                 System.out.println("All editors: " + editorRepo.findAll());
 
-<<<<<<< HEAD
+
                 JokePage jokePage1 = new JokePage("Funny Joke 1", ed, "This is a hilarious joke about Spring Boot.");
                 jokePageRepo.save(jokePage1);
 
@@ -71,7 +80,7 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 jokePageRepo.save(jokePage2);
 
                 System.out.println("All jokes: " + jokePageRepo.findAll());
-=======
+
                 Article article1 = new Article("Uguns", Genre.Urgent,ed1,"Svētku dienā Juris cepot gaļu nodzedzināja lauku, kas beidzās slikti :(");
                 articleRepo.save(article1);
 
@@ -79,7 +88,7 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 Review review2 = new Review("Žēl ugunis karsts",article1);
                 reviewRepo.save(review1);
                 reviewRepo.save(review2);
->>>>>>> Endijs
+
             }
 
         };
