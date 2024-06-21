@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Jokes</title>
+</head>
+<body>
+<h1>All Jokes</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Actions</th> <!-- New column for actions -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="joke : ${myobjs}">
+        <td th:text="${joke.idJo}">1</td>
+        <td th:text="${joke.title}">Default Title</td>
+        <td th:text="${joke.content}">Default Content</td>
+        <td>
+            <a class="btn btn-primary btn-sm" th:href="@{/joke/update/{id}(id=${joke.idJo})}">Update</a>
+            <a class="btn btn-danger btn-sm" th:href="@{/joke/remove/{id}(id=${joke.idJo})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Add button to navigate to add joke form -->
+<div class="container mt-4">
+    <a class="btn btn-success" th:href="@{/joke/add}">Add New Joke</a>
+</div>
+
+</body>
+</html>

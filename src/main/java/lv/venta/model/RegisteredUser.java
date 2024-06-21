@@ -10,10 +10,11 @@ import java.util.Collection;
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @Entity
 @NoArgsConstructor
-public class RegisteredUser extends Person{
+public class RegisteredUser extends MyUser {
+
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     @ToString.Exclude
     private Collection<Advertisement> adverts;
@@ -21,6 +22,7 @@ public class RegisteredUser extends Person{
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     @ToString.Exclude
     private Collection<Event> events;
+
     @PreRemove
     private void preRemove() {
         for (Advertisement adv : adverts) {
@@ -30,8 +32,14 @@ public class RegisteredUser extends Person{
             event.setAuthor(null);
         }
     }
-    public RegisteredUser(Person person) {
-        super(person);
+
+    public RegisteredUser(String username, String password) {
+        super(username, password);
     }
 
+    public RegisteredUser(MyUser myUser) {
+        super(myUser.getUsername(), myUser.getPassword());
+        this.setId(myUser.getId());
+        this.setAuthorities(myUser.getAuthorities());
+    }
 }

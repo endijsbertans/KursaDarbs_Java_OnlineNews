@@ -55,6 +55,11 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/editor/remove/*").permitAll()
                         .requestMatchers("/editor/add").permitAll()
                         .requestMatchers("/editor/update/*").permitAll()
+                        .requestMatchers("/joke/all").permitAll()
+                        .requestMatchers("/joke/remove/*").permitAll()
+                        .requestMatchers("/joke/add").permitAll()
+                        .requestMatchers("/joke/update/*").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
 
 
                 );

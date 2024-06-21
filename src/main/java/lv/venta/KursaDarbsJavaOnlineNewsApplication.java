@@ -26,7 +26,7 @@ public class KursaDarbsJavaOnlineNewsApplication {
             IEventRepo eventRepo,
             IArticleRepo articleRepo,
             IReviewRepo reviewRepo,
-            IPersonRepo personRepo,
+            IJokePageRepo jokePageRepo,
             IMyAuthorityRepo authRepo, IMyUserRepo userRepo){
 
         return new CommandLineRunner() {
@@ -55,7 +55,16 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 System.out.println("All users: " + userRepo.findAll());
                 editorRepo.save(ed);
                 System.out.println("All editors: " + editorRepo.findAll());
+
+                JokePage jokePage1 = new JokePage("Funny Joke 1", ed, "This is a hilarious joke about Spring Boot.");
+                jokePageRepo.save(jokePage1);
+
+                JokePage jokePage2 = new JokePage("Humorous Joke 2", ed, "Another funny joke to make you laugh.");
+                jokePageRepo.save(jokePage2);
+
+                System.out.println("All jokes: " + jokePageRepo.findAll());
             }
+
         };
     }
 }
