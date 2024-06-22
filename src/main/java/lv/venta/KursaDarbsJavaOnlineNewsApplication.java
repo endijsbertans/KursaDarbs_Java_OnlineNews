@@ -43,6 +43,7 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
                 MyUser u1 = new MyUser("Karli","Lauva", "admin", encoder.encode("123456"), a1);
                 Editor ed1 = new Editor("Daniels", "Kalnavs","daniels.kalnas", encoder.encode("123456"), FieldOfOperation.sport, a1);
+
                 userRepo.save(u1);
                 a1.addUser(u1);
                 authRepo.save(a1);

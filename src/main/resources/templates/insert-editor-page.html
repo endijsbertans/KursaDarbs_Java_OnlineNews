@@ -8,6 +8,19 @@
 <body>
 <h1>Add Editor</h1>
 <form th:action="@{/editor/add}" th:object="${editor}" method="post">
+    <!-- Include CSRF token -->
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" required>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    </div>
+    <div>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" th:field="*{surname}" required>
+        <div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
+    </div>
     <div>
         <label for="username">Username:</label>
         <input type="text" id="username" th:field="*{username}" required>

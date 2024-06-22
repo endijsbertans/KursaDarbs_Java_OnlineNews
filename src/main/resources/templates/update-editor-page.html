@@ -7,27 +7,31 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-<nav>
-    <h2>Edit Editor</h2>
-</nav>
-
 <h1>Edit Editor</h1>
 
 <form th:action="@{/editor/update/{id}(id=${editor.id})}" method="post" th:object="${editor}">
     <input type="hidden" th:field="*{id}" />
 
     <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" required>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    </div>
+    <div>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" th:field="*{surname}" required>
+        <div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
+    </div>
+    <div>
         <label for="username">Username:</label>
         <input type="text" id="username" th:field="*{username}" required>
         <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div>
     </div>
-
     <div>
         <label for="password">Password:</label>
         <input type="password" id="password" th:field="*{password}" required>
         <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
     </div>
-
     <div>
         <label for="fieldOfOperation">Field of Operation:</label>
         <select id="fieldOfOperation" th:field="*{fieldOfOperation}" required>
