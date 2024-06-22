@@ -27,21 +27,45 @@ public class KursaDarbsJavaOnlineNewsApplication {
             IEventRepo eventRepo,
             IArticleRepo articleRepo,
             IReviewRepo reviewRepo,
-            IPersonRepo personRepo,
+
+            IJokePageRepo jokePageRepo,
+
             IMyAuthorityRepo authRepo, IMyUserRepo userRepo, ReviewServiceImpl test){
+
+
 
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
 
-                Person pers = new Person("Daniels", "Kalnas");
-                Editor ed1 = new Editor(pers, FieldOfOperation.sport);
-                personRepo.save(pers);
+
+
+
+
+
+
+
+                MyAuthority a1 = new MyAuthority("ADMIN");
+                authRepo.save(a1);
+                PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+                MyUser u1 = new MyUser("Karli","Lauva", "admin", encoder.encode("123456"), a1);
+                Editor ed1 = new Editor("Daniels", "Kalnavs","daniels.kalnas", encoder.encode("123456"), FieldOfOperation.sport, a1);
+                userRepo.save(u1);
+                a1.addUser(u1);
+                authRepo.save(a1);
+                System.out.println("All users: " + userRepo.findAll());
+
                 editorRepo.save(ed1);
                 System.out.println("All editors: " + editorRepo.findAll());
 
-                Person pers2 = new Person("Endijs", "Bmwe");
-                personRepo.save(pers2);
+
+                JokePage jokePage1 = new JokePage("Funny Joke 1", ed1, "This is a hilarious joke about Spring Boot.");
+                jokePageRepo.save(jokePage1);
+
+                JokePage jokePage2 = new JokePage("Humorous Joke 2", ed1, "Another funny joke to make you laugh.");
+                jokePageRepo.save(jokePage2);
+
+                System.out.println("All jokes: " + jokePageRepo.findAll());
 
                 Article article1 = new Article("Uguns", Genre.Urgent,ed1,"Svētku dienā Juris cepot gaļu nodzedzināja lauku, kas beidzās slikti :(");
                 articleRepo.save(article1);
@@ -51,19 +75,8 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 reviewRepo.save(review1);
                 reviewRepo.save(review2);
 
-
-
-                MyAuthority a1 = new MyAuthority("ADMIN");
-                authRepo.save(a1);
-                PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-                MyUser u1 = new MyUser("admin", encoder.encode("123456"), a1);
-                userRepo.save(u1);
-                a1.addUser(u1);
-                authRepo.save(a1);
-                System.out.println("All users: " + userRepo.findAll());
-                System.out.println(article1);
-
             }
+
         };
     }
 }

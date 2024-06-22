@@ -18,12 +18,12 @@ import java.util.Collection;
 @ToString
 @Table(name="UserTable")
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class MyUser {
 
-    @Column(name = "Idu")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idu;
+    private Long id;  // Rename to id
 
     @NotNull
     @Pattern(regexp = "[A-Za-z.]+")
@@ -32,29 +32,40 @@ public class MyUser {
     private String username;
 
     @NotNull
+    @Pattern(regexp = "[A-Za-z.]+")
+    @Size(min = 3, max = 20)
+    @Column(name = "Name")
+    private String name;
+
+    @NotNull
+    @Pattern(regexp = "[A-Za-z.]+")
+    @Size(min = 3, max = 20)
+    @Column(name = "Surname")
+    private String surname;
+
+    @NotNull
     @Column(name = "Password")
     private String password;
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
-    private Collection<MyAuthority> authorities = new ArrayList<MyAuthority>();
+    private Collection<MyAuthority> authorities = new ArrayList<>();
 
-
-    public MyUser (String username, String password, MyAuthority ... auths) {
+    public MyUser(String name, String surname, String username, String password, MyAuthority... auths) {
+        setName(name);
+        setSurname(surname);
         setUsername(username);
         setPassword(password);
-        for(MyAuthority tempA: auths)
+        for (MyAuthority tempA : auths)
             addAuthority(tempA);
     }
 
-
     public void addAuthority(MyAuthority authority) {
-        if(!authorities.contains(authority))
+        if (!authorities.contains(authority))
             authorities.add(authority);
     }
 
     public void removeAuthority(MyAuthority authority) {
-        if(authorities.contains(authority))
+        if (authorities.contains(authority))
             authorities.remove(authority);
     }
-
 }

@@ -35,12 +35,13 @@ public class MyWebSecurityConfig {
     @Bean
     public SecurityFilterChain configureEndpoints(HttpSecurity http) throws Exception {
 
-        http
-                .authorizeHttpRequests(auth -> auth
+        http.authorizeHttpRequests(auth -> auth
+
+                        .requestMatchers("/h2-console/**").hasAuthority("ADMIN")
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/h2-console").permitAll()
                         .requestMatchers("/event/show/all").permitAll()
-                        .requestMatchers("/event/remove/{id}").permitAll()//tikai adminam
+                        .requestMatchers("/event/remove/{id}").permitAll()
                         .requestMatchers("/event/add").permitAll()
                         .requestMatchers("/event/update/*").permitAll()
                         .requestMatchers("/article/show/all").permitAll()
@@ -49,13 +50,25 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/article/update/*").permitAll()
                         .requestMatchers("/article/articleById/*").permitAll()
                         .requestMatchers("/advertisement/show/all").permitAll()
-                        .requestMatchers("/advertisement/remove/*").permitAll()
-                        .requestMatchers("/advertisement/add").permitAll()
-                        .requestMatchers("/advertisement/update/*").permitAll()
+                        .requestMatchers("/advertisement/remove/*").hasAnyAuthority("ADMIN","USER")
+                        .requestMatchers("/advertisement/add").hasAuthority("ADMIN")
+                        .requestMatchers("/advertisement/update/*").hasAuthority("ADMIN")
+                        .requestMatchers("/editor/all").permitAll()
+                        .requestMatchers("/editor/remove/*").permitAll()
+                        .requestMatchers("/editor/add").permitAll()
+                        .requestMatchers("/editor/update/*").permitAll()
+
+                        .requestMatchers("/joke/all").permitAll()
+                        .requestMatchers("/joke/remove/*").permitAll()
+                        .requestMatchers("/joke/update/*").permitAll()
+                        .requestMatchers("/joke/add").permitAll()
+
+                        .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/review/remove/*").permitAll()
                         .requestMatchers("/review/add/**").permitAll()
                         .requestMatchers("/review/update/**").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/error/**").permitAll()
+
                 );
 
         http.formLogin(form -> form.permitAll());

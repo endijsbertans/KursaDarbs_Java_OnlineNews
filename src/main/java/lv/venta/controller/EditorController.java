@@ -17,6 +17,18 @@ public class EditorController {
     @Autowired
     private IEditorService editorService;
 
+    @GetMapping("/all")
+    public String getAllEditors(Model model) {
+        try {
+            model.addAttribute("drivers", editorService.getAllEditors());
+            model.addAttribute("title", "All Editors");
+            return "all-editor-page";
+        }catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "error-page";
+        }
+    }
+
 
     @GetMapping("/show")
     public String selectEditorById(@PathVariable("id") long id, Model model) {
@@ -67,7 +79,7 @@ public class EditorController {
     }
 
     @PostMapping("/update/{id}")
-    public String postDriverUpdate(@PathVariable("id") long id, @Valid Editor editor, BindingResult result, Model model) {
+    public String postEditorUpdate(@PathVariable("id") long id, @Valid Editor editor, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("id", id);
             return "update-editor-page";

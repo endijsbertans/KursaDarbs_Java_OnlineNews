@@ -15,17 +15,17 @@ import java.util.Collection;
 @ToString
 @Entity
 @NoArgsConstructor
-public class Editor extends Person {
+public class Editor extends MyUser {
 
     @Enumerated(EnumType.STRING)
     @NotNull
     @Column(name = "field_of_operation")
     private FieldOfOperation fieldOfOperation;
 
-
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private Collection<Article> articles;
+    private Collection<Article> articles = new ArrayList<>();
+
     @PreRemove
     private void preRemove() {
         for (Article article : articles) {
@@ -33,8 +33,8 @@ public class Editor extends Person {
         }
     }
 
-    public Editor(Person person, FieldOfOperation fieldOfOperation) {
-        super(person);
+    public Editor(String name, String surname, String username, String password, FieldOfOperation fieldOfOperation, MyAuthority... auths) {
+        super(name, surname, username, password, auths);
         this.fieldOfOperation = fieldOfOperation;
     }
 }
