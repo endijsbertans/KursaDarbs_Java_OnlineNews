@@ -42,9 +42,9 @@ public class Advertisement {
 
     @ManyToOne
     @JoinColumn(name = "Author")
-    private RegisteredUser author;
+    private MyUser author;
 
-    public Advertisement(String title, float price, String description, RegisteredUser author) {
+    public Advertisement(String title, float price, String description, MyUser author) {
         setAuthor(author);
         setTitle(title);
         setPrice(price);

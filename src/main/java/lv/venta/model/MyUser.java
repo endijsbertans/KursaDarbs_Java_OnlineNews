@@ -50,6 +50,14 @@ public class MyUser {
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private Collection<MyAuthority> authorities = new ArrayList<>();
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private Collection<Advertisement> adverts;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private Collection<Event> events;
+
     public MyUser(String name, String surname, String username, String password, MyAuthority... auths) {
         setName(name);
         setSurname(surname);
