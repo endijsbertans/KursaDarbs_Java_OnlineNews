@@ -3,7 +3,6 @@ package lv.venta.service.impl;
 import lv.venta.model.*;
 import lv.venta.repo.IEventRepo;
 import lv.venta.repo.IMyUserRepo;
-import lv.venta.repo.IRegisteredUserRepo;
 import lv.venta.service.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -56,6 +55,8 @@ public class EventServiceImpl implements IEventService {
             event.setStartDate(LocalDateTime.now().plusDays(event.getStartTimeInDays()));
             if (currentUser != null)
                 event.setAuthor(currentUser);
+            else
+                throw new Exception("User is not logged in");
             return eventRepo.save(event);
         }
     }

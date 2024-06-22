@@ -32,6 +32,7 @@
             <th>Price</th>
             <th>Description</th>
             <th>Date Created</th>
+            <th>Autors</th>
             <th>Options</th>
         </tr>
         </thead>
@@ -42,6 +43,11 @@
             <td th:text="${tempPr.getPrice()}"></td>
             <td th:text="${tempPr.getDescription()}"></td>
             <td th:text="${tempPr.getDate()}"></td>
+            <td>
+                <p th:text="${tempPr.getAuthor().getName()}">
+                <p th:text="${tempPr.getAuthor().getSurname()}"></p></p>
+            </td>
+
             <td>
                 <a class="btn btn-primary btn-sm" th:href="@{'/advertisement/update/' + ${tempPr.ida}}" target="_self">Update</a>
                 <a class="btn btn-danger btn-sm" th:href="@{'/advertisement/remove/' + ${tempPr.ida}}" target="_self">Delete</a>
