@@ -32,7 +32,7 @@ public class ArticleController {
         try {
             model.addAttribute("myobjs", articleService.getAllArticles());
 
-            model.addAttribute("title", "All articles");
+            model.addAttribute("title", "All Articles");
             return "show-all-art";
         } catch (Exception e) {
             model.addAttribute("msg", e.getMessage());
