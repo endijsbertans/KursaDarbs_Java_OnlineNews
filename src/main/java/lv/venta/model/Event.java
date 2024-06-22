@@ -48,8 +48,8 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "Author")
-    private RegisteredUser author;
-    public Event(String title, float price, String description, int startTimeInDays, RegisteredUser author) {
+    private MyUser author;
+    public Event(String title, float price, String description, int startTimeInDays, MyUser author) {
         setAuthor(author);
         setTitle(title);
         setPrice(price);

@@ -42,7 +42,7 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/h2-console").permitAll()
                         .requestMatchers("/event/show/all").permitAll()
                         .requestMatchers("/event/remove/{id}").permitAll()
-                        .requestMatchers("/event/add").permitAll()
+                        .requestMatchers("/event/add").hasAnyAuthority("ADMIN","USER")
                         .requestMatchers("/event/update/*").permitAll()
                         .requestMatchers("/article/show/all").permitAll()
                         .requestMatchers("/article/remove/*").permitAll()

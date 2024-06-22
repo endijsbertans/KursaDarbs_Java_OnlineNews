@@ -1,9 +1,14 @@
 package lv.venta.service.impl;
 
 import lv.venta.model.Advertisement;
+import lv.venta.model.MyUser;
 import lv.venta.repo.IAdvertisementRepo;
+import lv.venta.repo.IEventRepo;
+import lv.venta.repo.IMyUserRepo;
 import lv.venta.service.IAdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,6 +18,9 @@ import java.util.ArrayList;
 public class AdvertisementServiceImpl implements IAdvertisementService {
     @Autowired
     private IAdvertisementRepo advertisementRepo;
+
+    @Autowired
+    private IMyUserRepo userRepo;
     @Override
     public ArrayList<Advertisement> selectAllAdv() {
         return (ArrayList<Advertisement>) advertisementRepo.findAll();
@@ -26,14 +34,29 @@ public class AdvertisementServiceImpl implements IAdvertisementService {
         }
         throw new Exception("Adv with " + id + " is not found");
     }
+    public MyUser getCurrentUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            String username = ((UserDetails) principal).getUsername();
+            // Fetch the User entity from the database
+            return userRepo.findByUsername(username);
+        } else {
+            return null;
+        }
+    }
     @Override
     public Advertisement insertNewAdv(Advertisement adv) throws Exception {
         if(adv == null) throw new Exception("Advert is null");
+        MyUser currentUser = getCurrentUser();
        // personRepo.save(customer.getPerson()); this should be added when person class completes
         Advertisement advFromDB = advertisementRepo.findByTitleAndPriceAndDescription(adv.getTitle(), adv.getPrice(), adv.getDescription());
         if(advFromDB  != null) {
             throw new Exception("advert already exists");
         } else {
+            if (currentUser != null)
+                adv.setAuthor(currentUser);
+            else
+                throw new Exception("User is not logged in");
             adv.setDate(LocalDateTime.now());
             return advertisementRepo.save(adv);
         }
