@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/editor")
-
 public class EditorController {
 
     @Autowired
@@ -20,32 +19,16 @@ public class EditorController {
     @GetMapping("/all")
     public String getAllEditors(Model model) {
         try {
-            model.addAttribute("drivers", editorService.getAllEditors());
-            model.addAttribute("title", "All Editors");
+            model.addAttribute("editors", editorService.getAllEditors());
             return "all-editor-page";
-        }catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "error-page";
-        }
-    }
-
-
-    @GetMapping("/show")
-    public String selectEditorById(@PathVariable("id") long id, Model model) {
-        try {
-            model.addAttribute("title", "Editor by ID");
-            model.addAttribute("myobj", editorService.selectEditorById(id));
-            return "show-editor-id";
         } catch (Exception e) {
             model.addAttribute("msg", e.getMessage());
-            model.addAttribute("title", "Error Page");
             return "error-page";
         }
     }
 
     @GetMapping("/add")
     public String getEditorAdd(Model model) {
-        model.addAttribute("title", "Add Editor");
         model.addAttribute("editor", new Editor());
         return "insert-editor-page";
     }
@@ -53,62 +36,52 @@ public class EditorController {
     @PostMapping("/add")
     public String postEditorAdd(@Valid @ModelAttribute("editor") Editor editor, BindingResult result, Model model) {
         if (result.hasErrors()) {
-
-            return "insert-editor-page";
-        } else {
-            try {
-                editorService.insertNewEditor(editor);
-                return "redirect:/editor/all";
-            } catch (Exception e) {
-                return "redirect:/error";
-            }
+            model.addAttribute("editor", editor);
+            return "insert-editor-page"; 
+        }
+        try {
+            editorService.insertNewEditor(editor);
+            return "redirect:/editor/all";
+        } catch (Exception e) {
+            model.addAttribute("msg", "Error adding editor: " + e.getMessage());
+            return "error-page";
         }
     }
 
     @GetMapping("/update/{id}")
     public String getEditorUpdate(@PathVariable("id") long id, Model model) {
         try {
-            model.addAttribute("title", "Update Editor");
             model.addAttribute("editor", editorService.selectEditorById(id));
             return "update-editor-page";
         } catch (Exception e) {
             model.addAttribute("msg", e.getMessage());
-            model.addAttribute("title", "Error Page");
             return "error-page";
         }
     }
 
     @PostMapping("/update/{id}")
-    public String postEditorUpdate(@PathVariable("id") long id, @Valid Editor editor, BindingResult result, Model model) {
+    public String postEditorUpdate(@PathVariable("id") long id, @Valid @ModelAttribute("editor") Editor editor, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("id", id);
+            model.addAttribute("editor", editor);
             return "update-editor-page";
-        } else {
-            try {
-                editorService.updateEditorById(id, editor);
-                return "redirect:/editor/all";
-            } catch (Exception e) {
-                return "redirect:/error";
-            }
+        }
+        try {
+            editorService.updateEditorById(id, editor);
+            return "redirect:/editor/all";
+        } catch (Exception e) {
+            model.addAttribute("msg", "Error updating editor: " + e.getMessage());
+            return "error-page";
         }
     }
 
-
     @GetMapping("/remove/{id}")
-    public String deleteEditorById(@PathVariable("id") long id, Model model) {
+    public String removeEditor(@PathVariable("id") long id, Model model) {
         try {
-            model.addAttribute("title", "Editor removed");
-            model.addAttribute("myobj", editorService.deleteEditorById(id));
+            editorService.deleteEditorById(id);
             return "redirect:/editor/all";
         } catch (Exception e) {
             model.addAttribute("msg", e.getMessage());
-            model.addAttribute("title", "Error Page");
             return "error-page";
         }
     }
 }
-
-
-
-
-

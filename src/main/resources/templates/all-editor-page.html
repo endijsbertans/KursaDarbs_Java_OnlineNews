@@ -22,25 +22,20 @@
     </tr>
     </thead>
     <tbody>
-    <!-- Iterating over editors -->
     <tr th:each="editor : ${editors}">
         <td th:text="${editor.id}"></td>
         <td th:text="${editor.username}"></td>
         <td th:text="${editor.fieldOfOperation}"></td>
         <td>
-            <!-- Link for deletion -->
-            <a th:href="@{'/editor/remove/' + ${editor.id} + '?_method=DELETE'}" th:onclick="'if (!confirm(\'Are you sure you want to delete this editor?\')) return false;'">Delete</a>
-
-            <!-- Link for update -->
+            <a th:href="@{'/editor/remove/' + ${editor.id}}" th:onclick="'if (!confirm(\'Are you sure you want to delete this editor?\')) return false;'">Delete</a>
             <a th:href="@{'/editor/update/' + ${editor.id}}">Update</a>
         </td>
     </tr>
     </tbody>
 </table>
 
-<!-- Add Editor Button -->
 <div>
-    <a href="/editor/add">Add Editor</a>
+    <a th:href="@{/editor/add}">Add Editor</a>
 </div>
 
 </body>
