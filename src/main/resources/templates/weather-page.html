@@ -3,11 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Current Weather</h1>
-<p>Description: <span th:text="${weather.description}"></span></p>
-<p>Temperature: <span th:text="${weather.temperature}"></span> °C</p>
-<p>Last Updated: <span th:text="${weather.lastUpdated}"></span></p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <h2 class="navbar-brand" th:text="${title}">Weather Page</h2>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/advertisement/show/all}">Show All Adverts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/event/show/all}">Show All Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger" th:href="@{/article/show/all}">Show All Articles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/joke/all}">Show Random Joke</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/weather}">Show Today's Weather</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<div class="container mt-4">
+    <h1 class="text-center">Current Weather</h1>
+    <div class="weather-info p-4 mt-4 rounded" style="background-color: #e3f2fd;">
+        <p><strong>Description:</strong> <span th:text="${weather.description}"></span></p>
+        <p><strong>Temperature:</strong> <span th:text="${weather.temperature}"></span> °C</p>
+        <p><strong>Last Updated:</strong> <span th:text="${weather.lastUpdated}"></span></p>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
