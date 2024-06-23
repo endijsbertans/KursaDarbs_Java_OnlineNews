@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(name = "Joke_TABLE")
 @Entity
+@Table(name = "Joke_TABLE")
 public class JokePage {
 
     @Id
@@ -37,10 +37,6 @@ public class JokePage {
     @Column(name = "DatePosted")
     private LocalDate datePosted = LocalDate.now();
 
-    @Column(name = "ImageFilename")
-    private String imageFilename;
-
-    // Constructors, getters, setters, etc.
     public JokePage(String title, Editor author, String content) {
         this.title = title;
         this.author = author;

@@ -4,7 +4,12 @@
     <title th:text="${title}">Home Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* Custom styles can be added here */
+        body {
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+        }
     </style>
 </head>
 <body>
@@ -16,7 +21,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" th:href="@{/advertisement/show/all}">Show All Adverts</a>
             </li>
             <li class="nav-item">
@@ -24,6 +29,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/article/show/all}">Show All Articles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/joke/all}">Show Random Jokes</a>
             </li>
         </ul>
     </div>
@@ -36,6 +44,7 @@
         </div>
     </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

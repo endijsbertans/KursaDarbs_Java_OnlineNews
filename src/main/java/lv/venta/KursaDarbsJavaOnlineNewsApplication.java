@@ -42,13 +42,15 @@ public class KursaDarbsJavaOnlineNewsApplication {
                 authRepo.save(a1);
                 PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
                 MyUser u1 = new MyUser("Karli","Lauva", "admin", encoder.encode("123456"), a1);
-                Editor ed1 = new Editor("Daniels", "Kalnavs","daniels.kalnas", encoder.encode("123456"), FieldOfOperation.sport, a1);
+                Editor ed1 = new Editor("Daniels", "Kalnavs","daniels.kalnas", encoder.encode("123456"), FieldOfOperation.culture, a1);
+                Editor ed2 = new Editor("Makis", "Purvins","makis.purvins", encoder.encode("123456"), FieldOfOperation.sport, a1);
 
                 userRepo.save(u1);
                 a1.addUser(u1);
                 authRepo.save(a1);
                 System.out.println("All users: " + userRepo.findAll());
 
+                editorRepo.save(ed2);
                 editorRepo.save(ed1);
                 System.out.println("All editors: " + editorRepo.findAll());
 
