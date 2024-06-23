@@ -38,6 +38,8 @@ public class KursaDarbsJavaOnlineNewsApplication {
             @Override
             public void run(String... args) throws Exception {
 
+
+
                 MyAuthority a1 = new MyAuthority("ADMIN");
                 authRepo.save(a1);
                 PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();

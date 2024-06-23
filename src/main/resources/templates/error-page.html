@@ -1,13 +1,24 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<head>
+    <title th:text="${city + ' Weather'}">Weather</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
 <body>
-<nav>
-    <ul>
-        <li><a th:href="@{/advertisement/show/all}">Show All Adverts</a></li>
-        <li><a th:href="@{/event/show/all}">Show All Events</a></li>
-    </ul>
-</nav>
-<h1 th:text = "${title}" style="color:red;"></h1>
-<h2 th:text = "${msg}"></h2>
+<div class="container mt-4">
+    <h1 th:text="'Weather in ' + ${city}"></h1>
+    <div th:if="${weather}">
+        <p th:text="'Description: ' + ${weather.description}"></p>
+        <p th:text="'Temperature: ' + ${weather.temperature} + '°C'"></p>
+        <p th:text="'Humidity: ' + ${weather.humidity} + '%'"></p>
+    </div>
+    <div th:if="${not weather}">
+        <p class="text-danger" th:text="${errorMsg}"></p>
+    </div>
+    <a class="btn btn-primary mt-3" th:href="@{/weathers/weather}">Back to Weather</a>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

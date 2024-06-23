@@ -37,6 +37,9 @@ public class JokePage {
     @Column(name = "DatePosted")
     private LocalDate datePosted = LocalDate.now();
 
+    @Column(name = "ImageUrl")
+    private String imageUrl;
+
     public JokePage(String title, Editor author, String content) {
         this.title = title;
         this.author = author;
