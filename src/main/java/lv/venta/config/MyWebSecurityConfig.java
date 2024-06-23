@@ -72,6 +72,8 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/review/update/**").permitAll()
                         .requestMatchers("/error/**").permitAll()
 
+                        .requestMatchers("weathers/").permitAll()
+
                 );
 
         http.formLogin(form -> form.permitAll());
