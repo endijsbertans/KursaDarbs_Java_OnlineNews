@@ -25,7 +25,7 @@ public class JokePage {
     @Column(name = "Title")
     private String title;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Author")
     private Editor author;
 
@@ -37,8 +37,7 @@ public class JokePage {
     @Column(name = "DatePosted")
     private LocalDate datePosted = LocalDate.now();
 
-    @Column(name = "ImageUrl")
-    private String imageUrl;
+
 
     public JokePage(String title, Editor author, String content) {
         this.title = title;
@@ -46,4 +45,5 @@ public class JokePage {
         this.content = content;
         this.datePosted = LocalDate.now();
     }
+
 }

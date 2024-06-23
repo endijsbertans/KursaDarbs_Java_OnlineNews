@@ -8,7 +8,6 @@
 <body>
 <h1>Add Editor</h1>
 <form th:action="@{/editor/add}" th:object="${editor}" method="post">
-    <!-- Include CSRF token -->
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
     <div>
