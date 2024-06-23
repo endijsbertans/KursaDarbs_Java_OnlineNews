@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/joke")
@@ -22,11 +20,17 @@ public class JokePageController {
     private IJokePageService jokeService;
 
     @GetMapping("/all")
-    public String showAllJokes(Model model) {
+    public String showAllJokes(Model model, Principal principal) {
         try {
-            model.addAttribute("myobjs", jokeService.getAllJoke());
-            model.addAttribute("title", "All jokes");
-            return "all-jokes-page";
+            if (isAdmin(principal)) {
+                model.addAttribute("myobjs", jokeService.getAllJoke());
+                model.addAttribute("title", "All jokes");
+                return "all-jokes-page";
+            } else {
+                model.addAttribute("myobj", jokeService.getRandomJoke());
+                model.addAttribute("title", "Random Joke");
+                return "random-joke-page";
+            }
         } catch (Exception e) {
             model.addAttribute("msg", e.getMessage());
             model.addAttribute("title", "Error Page");
@@ -55,12 +59,12 @@ public class JokePageController {
     }
 
     @PostMapping("/add")
-    public String postJokeAdd(@Valid JokePage jokePage, BindingResult result, @RequestParam("imageFile") MultipartFile imageFile, Model model) {
+    public String postJokeAdd(@Valid JokePage jokePage, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "insert-joke-page";
         } else {
             try {
-                jokeService.addJoke(jokePage, imageFile);
+                jokeService.addJoke(jokePage);
                 return "redirect:/joke/all";
             } catch (Exception e) {
                 model.addAttribute("msg", e.getMessage());
@@ -98,5 +102,10 @@ public class JokePageController {
                 return "error-page";
             }
         }
+    }
+
+
+    private boolean isAdmin(Principal principal) {
+        return principal != null && principal.getName().equals("admin");
     }
 }

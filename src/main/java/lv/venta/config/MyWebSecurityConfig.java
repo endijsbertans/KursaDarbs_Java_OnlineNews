@@ -59,9 +59,12 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/editor/update/*").permitAll()
 
                         .requestMatchers("/joke/all").permitAll()
-                        .requestMatchers("/joke/remove/*").permitAll()
-                        .requestMatchers("/joke/update/*").permitAll()
-                        .requestMatchers("/joke/add").permitAll()
+                        .requestMatchers("/joke/remove/**").hasAuthority("ADMIN")
+                        .requestMatchers("/joke/update/**").hasAuthority("ADMIN")
+                        .requestMatchers("/joke/add").hasAuthority("ADMIN")
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/error/**").permitAll()
+
 
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/review/remove/*").permitAll()

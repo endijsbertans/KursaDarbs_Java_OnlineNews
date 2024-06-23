@@ -1,49 +1,28 @@
 package lv.venta.service.impl;
 
-import lv.venta.model.Editor;
 import lv.venta.model.JokePage;
 import lv.venta.repo.IJokePageRepo;
 import lv.venta.service.IJokePageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @Service
 public class JokePageServiceImpl implements IJokePageService {
 
-    private static final String UPLOAD_DIR = "uploads/";
-
     @Autowired
     private IJokePageRepo jokePageRepo;
 
-
     @Override
-    public void addJoke(JokePage jokePage, MultipartFile imageFile) throws Exception {
+    public void addJoke(JokePage jokePage) throws Exception {
         if (jokePage == null) {
             throw new Exception("Something wrong with input");
         }
-
-        if (imageFile != null && !imageFile.isEmpty()) {
-            String filename = saveImage(imageFile);
-            jokePage.setImageFilename(filename);
-        }
-
         JokePage jokePageNew = new JokePage(jokePage.getTitle(), jokePage.getAuthor(), jokePage.getContent());
         jokePageRepo.save(jokePageNew);
-    }
-
-    private String saveImage(MultipartFile imageFile) throws IOException {
-        String filename = imageFile.getOriginalFilename();
-        Path filepath = Paths.get(UPLOAD_DIR, filename);
-        Files.createDirectories(filepath.getParent());
-        Files.write(filepath, imageFile.getBytes());
-        return filename;
     }
 
     @Override
@@ -72,8 +51,7 @@ public class JokePageServiceImpl implements IJokePageService {
         }
 
         if (jokePageRepo.findById(id).isPresent()) {
-            JokePage jokePage = jokePageRepo.findById(id).get();
-            return jokePage;
+            return jokePageRepo.findById(id).get();
         } else {
             throw new Exception("There is no JokePage with this id");
         }
@@ -82,5 +60,14 @@ public class JokePageServiceImpl implements IJokePageService {
     @Override
     public ArrayList<JokePage> getAllJoke() throws Exception {
         return (ArrayList<JokePage>) jokePageRepo.findAll();
+    }
+    @Override
+    public JokePage getRandomJoke() throws Exception {
+            List<JokePage> allJokes = (List<JokePage>) jokePageRepo.findAll();
+        if (allJokes.isEmpty()) {
+            throw new Exception("No jokes available");
+        }
+        Random random = new Random();
+        return allJokes.get(random.nextInt(allJokes.size()));
     }
 }
