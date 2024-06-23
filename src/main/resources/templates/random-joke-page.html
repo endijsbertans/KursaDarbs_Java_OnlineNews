@@ -29,9 +29,6 @@
             <h5 class="card-title" th:text="${myobj.title}"></h5>
             <p class="card-text" th:text="${myobj.content}"></p>
             <p class="card-text"><small class="text-muted" th:text="${myobj.author.name}"></small></p>
-
-            <!-- Displaying the image -->
-            <img th:src="@{${myobj.imageUrl}}" class="img-fluid" alt="Random Image">
         </div>
     </div>
 </div>

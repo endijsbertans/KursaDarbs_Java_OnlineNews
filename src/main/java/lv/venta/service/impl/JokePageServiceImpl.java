@@ -63,14 +63,11 @@ public class JokePageServiceImpl implements IJokePageService {
     }
     @Override
     public JokePage getRandomJoke() throws Exception {
-        List<JokePage> allJokes = (List<JokePage>) jokePageRepo.findAll();
+            List<JokePage> allJokes = (List<JokePage>) jokePageRepo.findAll();
         if (allJokes.isEmpty()) {
             throw new Exception("No jokes available");
         }
         Random random = new Random();
-        JokePage randomJoke = allJokes.get(random.nextInt(allJokes.size()));
-        randomJoke.setImageUrl("/images/example.jpg");
-        return randomJoke;
+        return allJokes.get(random.nextInt(allJokes.size()));
     }
-
 }
