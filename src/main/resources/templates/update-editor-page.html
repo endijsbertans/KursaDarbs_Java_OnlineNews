@@ -4,51 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Editor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Edit Editor</h1>
 
-<form th:action="@{/editor/update/{id}(id=${editor.id})}" method="post" th:object="${editor}">
-    <input type="hidden" th:field="*{id}" />
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Editor Management</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/advertisement/show/all}">Show All Adverts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/event/show/all}">Show All Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/article/show/all}">Show All Articles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/joke/all}">Show Random Joke</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/weather}">Show Today's Weather</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" th:field="*{name}" required>
-        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
-    </div>
-    <div>
-        <label for="surname">Surname:</label>
-        <input type="text" id="surname" th:field="*{surname}" required>
-        <div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
-    </div>
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" th:field="*{username}" required>
-        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div>
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" th:field="*{password}" required>
-        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
-    </div>
-    <div>
-        <label for="fieldOfOperation">Field of Operation:</label>
-        <select id="fieldOfOperation" th:field="*{fieldOfOperation}" required>
-            <option value="">Please select</option>
-            <option th:each="operation : ${T(lv.venta.model.FieldOfOperation).values()}"
-                    th:value="${operation}" th:text="${operation}">
-            </option>
-        </select>
-        <div th:if="${#fields.hasErrors('fieldOfOperation')}" th:errors="*{fieldOfOperation}">Field of Operation Error</div>
-    </div>
+<div class="container mt-4">
+    <h1 class="text-center">Edit Editor</h1>
+    <form th:action="@{/editor/update/{id}(id=${editor.id})}" method="post" th:object="${editor}">
+        <input type="hidden" th:field="*{id}" />
 
-    <div>
-        <button type="submit">Update</button>
-    </div>
-</form>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+        </div>
+        <div class="form-group">
+            <label for="surname">Surname:</label>
+            <input type="text" class="form-control" id="surname" th:field="*{surname}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
+        </div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" th:field="*{username}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+        </div>
+        <div class="form-group">
+            <label for="fieldOfOperation">Field of Operation:</label>
+            <select class="form-control" id="fieldOfOperation" th:field="*{fieldOfOperation}" required>
+                <option value="">Please select</option>
+                <option th:each="operation : ${T(lv.venta.model.FieldOfOperation).values()}"
+                        th:value="${operation}" th:text="${operation}">
+                </option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('fieldOfOperation')}" th:errors="*{fieldOfOperation}">Field of Operation Error</div>
+        </div>
 
-<a th:href="@{/editor/all}">Back to List</a>
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
 
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

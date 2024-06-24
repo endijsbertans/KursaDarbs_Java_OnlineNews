@@ -37,6 +37,7 @@ public class MyWebSecurityConfig {
 
         http.authorizeHttpRequests(auth -> auth
 
+
                 .requestMatchers("/h2-console/**").hasAuthority("ADMIN")
                 .requestMatchers("/").permitAll()
                 .requestMatchers("/h2-console").hasAnyAuthority("ADMIN","USER")
