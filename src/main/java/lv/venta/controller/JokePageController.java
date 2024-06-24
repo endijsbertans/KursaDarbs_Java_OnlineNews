@@ -104,8 +104,6 @@ public class JokePageController {
         }
     }
 
-
-
     private boolean isAdmin(Principal principal) {
         return principal != null && principal.getName().equals("admin");
     }
