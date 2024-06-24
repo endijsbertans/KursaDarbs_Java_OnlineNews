@@ -39,24 +39,27 @@ public class MyWebSecurityConfig {
 
                         .requestMatchers("/h2-console/**").hasAuthority("ADMIN")
                         .requestMatchers("/").permitAll()
-                        .requestMatchers("/h2-console").permitAll()
+                        .requestMatchers("/h2-console").hasAnyAuthority("ADMIN","USER")
                         .requestMatchers("/event/show/all").permitAll()
-                        .requestMatchers("/event/remove/{id}").permitAll()
+                        .requestMatchers("/event/remove/{id}").hasAnyAuthority("ADMIN","USER")
                         .requestMatchers("/event/add").hasAnyAuthority("ADMIN","USER")
-                        .requestMatchers("/event/update/*").permitAll()
+                        .requestMatchers("/event/update/*").hasAnyAuthority("ADMIN","USER")
+
                         .requestMatchers("/article/show/all").permitAll()
-                        .requestMatchers("/article/remove/*").permitAll()
-                        .requestMatchers("/article/add/**").permitAll()
-                        .requestMatchers("/article/update/*").permitAll()
+                        .requestMatchers("/article/remove/*").hasAnyAuthority("ADMIN","USER")
+                        .requestMatchers("/article/add/**").hasAnyAuthority("ADMIN","USER")
+                        .requestMatchers("/article/update/*").hasAnyAuthority("ADMIN","USER")
                         .requestMatchers("/article/articleById/*").permitAll()
+
                         .requestMatchers("/advertisement/show/all").permitAll()
                         .requestMatchers("/advertisement/remove/*").hasAnyAuthority("ADMIN","USER")
                         .requestMatchers("/advertisement/add").hasAuthority("ADMIN")
                         .requestMatchers("/advertisement/update/*").hasAuthority("ADMIN")
-                        .requestMatchers("/editor/all").permitAll()
-                        .requestMatchers("/editor/remove/*").permitAll()
-                        .requestMatchers("/editor/add").permitAll()
-                        .requestMatchers("/editor/update/*").permitAll()
+
+                        .requestMatchers("/editor/all").hasAuthority("ADMIN")
+                        .requestMatchers("/editor/remove/*").hasAuthority("ADMIN")
+                        .requestMatchers("/editor/add").hasAuthority("ADMIN")
+                        .requestMatchers("/editor/update/*").hasAuthority("ADMIN")
 
                         .requestMatchers("/joke/all").permitAll()
                         .requestMatchers("/joke/remove/**").hasAuthority("ADMIN")
@@ -66,7 +69,7 @@ public class MyWebSecurityConfig {
                         .requestMatchers("/error/**").permitAll()
 
 
-                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/h2-console/**").hasAnyAuthority("ADMIN","USER")
                         .requestMatchers("/review/remove/*").permitAll()
                         .requestMatchers("/review/add/**").permitAll()
                         .requestMatchers("/review/update/**").permitAll()

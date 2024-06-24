@@ -46,7 +46,5 @@ public class Review {
     }
 
 
-    public void setArticleId(long articleId) {
-        this.idre = articleId;
-    }
+  
 }
