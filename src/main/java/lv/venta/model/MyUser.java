@@ -23,7 +23,7 @@ public class MyUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;  // Rename to id
+    private Long id;
 
     @NotNull
     @Pattern(regexp = "[A-Za-z.]+")

@@ -36,7 +36,7 @@ public class Review {
     private Article article;
 
 
-    // User jagaida uz Rudolfu
+
 
 
     public Review(String message, Article article){
